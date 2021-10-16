@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+    <div class="container-fluid">
+        <div class="row">
+          {% include 'userinterface/tabs.html.twig' %}
+
+            <div class="col mb-3 mt-3 p-5" style="background-color: white;">
+                      {% include 'userinterface/profilehead.html.twig' %}
+
+                <div class="container">
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="text-dark" href="{{path('home')}}">Accueil</a></li>
+                            <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute')}}">Mon Profil</a></li>
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute_habitats')}}">Mes Habitats</a></li>
+                        </ol>
+                    </nav>
+                    {% for habitat in habitats %}
+
+                        <div class="col-12 mt-3">
+                            <div class="col-3" style="margin-left:80%;">
+                                <button class="btn-atypik-house"><a href="{{path('internaute_habitats_new' , {'id': habitat.idDomaine.id}) }}">Ajouter un Habitat</a></button>
+
+                            </div>
+                        </div>
+                        <div class="text-center col-12 p-5">
+                            <h4>Mes Habitats</h4>
+                        </div>
+                        <div class="col-5 mb-3 border border-dark carte">
+                            <img src="{{asset('images/habitat/'~ habitat.url)}}" width="100%">
+                            <div class=" d-block p-3 col-12 content">
+                                <h5 class="text-center mt-3">{{habitat.nom}}</h5>
+                                <p class="desc">
+                                </p>
+                                <hr>
+                                <button class="btn-atypik-house" style="margin-left : 10% ;"><a href="{{path('internaute_habitats_details' , { 'id': habitat.id })}}" >Détails</a></button>
+                            </div>
+            
+                        </div>
+                        {% endfor %}
+
+                </div>
+                <!-- Navigation Tabs-->
+
+            </div>
+        </div>
+    </div>
+{% include 'footer.html.twig' %}
+
+{% endblock %}

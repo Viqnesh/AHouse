@@ -1,0 +1,83 @@
+
+
+    <header class="head-bg">
+    
+      <div class="header-wrapper">
+          <a href="{{path('home')}}" class="header-logo">
+              <img src="{{asset('images/logo.svg')}}">
+          </a>
+                  <div class="wrapper-menu">
+                    <label class="menu">
+                        <a href="{{path('contact')}}">
+                            Accueil
+
+                        </a>
+                    </label>          
+                </div>
+  
+                  <div class="wrapper-menu">
+                      <label class="menu">
+                          <a href="{{path('domaine_liste')}}">
+                              Nos Régions
+                          </a>
+                      </label>
+
+                  </div>
+  
+                  <div class="wrapper-menu">
+                      <label class="menu">
+                          <a href="{{path('hebergements')}}">
+                              Nos Logements
+                          </a>
+                      </label>         
+                  </div>
+                      
+                  <div class="wrapper-menu">
+                      <label class="menu">
+                        <a href="">
+                              Qui Sommes-Nous ?
+                          </a>
+                      </label>          
+                  </div>
+                  <div class="wrapper-menu">
+                      <label class="menu">
+                        <a href="{{path('questions')}}">
+                          FAQ
+                          </a>
+                      </label>
+                      
+                  </div>
+                  <div class="wrapper-menu">
+                    <label class="menu">
+                        <a href="{{path('contact')}}">
+                            Contact
+
+                        </a>
+                    </label>          
+                </div>
+                  <div class="wrapper-menu">
+                    <label class="menu">
+                        <a href="{{path('contact')}}">
+                            Newsletter
+
+                        </a>
+                    </label>          
+                </div>
+                {% if app.user %}
+                <div class="wrapper-menu">
+                    <label class="menu login">
+                        <a href="{{path('app_login')}}">Mon Profil</a>                     
+                    </label>
+                </div>
+                {% else %}
+                <div class="wrapper-menu">
+                    <label class="menu login">
+                        <a href="{{path('app_login')}}">S'identifier</a>                       
+                    </label>  
+                </div>
+                {% endif %}
+          </div>
+
+  
+      </div>
+    </header>

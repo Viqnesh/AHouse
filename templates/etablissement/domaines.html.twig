@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+<img class="rent-banner" src="{{asset('images/domaines/'~ domaine.image)}}">
+
+<div class="d-flex rent-content" style="background-color: background-color : #F9F9F9;">
+
+    <div class="col-12">
+        <div class="col-12 p-5">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-8">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" >
+                          <li class="breadcrumb-item active" aria-current="page">Accueil</li>
+                          <li class="breadcrumb-item active" aria-current="page">Les Domaines</li>
+                          <li class="breadcrumb-item active" aria-current="page">{{domaine.nom}}</li>
+                        </ol>
+                      </nav>
+                    </div>
+                    <div class="col-12 ml-5">
+                        <h1 class="font-weight-700">{{domaine.nom}}</h1>
+                        <span class="lieu"><i class="fa fa-map-marker" aria-hidden="true"></i> {{domaine.pays}} , {{domaine.ville}}</span>
+                    </div>
+                    <div class="row mt-4 mr-3">
+                      <div class="col-6 text-justify design-shadow">
+                          <h3 class="mb-3 title-location">Description</h3>
+                        <p class="text-justify">{{domaine.description}}}</p>
+                      </div>
+                    </div>
+                    <div class="d-flex col-12">
+                            <div class="bloc-info mb-3 ml-3 col-3"> 
+                                <div class="round-icon">
+                                    <span class="icon-info">
+                                        <img src="{{asset('images/icons/calendar.png')}}" width="100%">
+
+                                    </span>
+                                </div> 
+                                <div class="details">
+                                    <div class="title">Heure d'arrivée : </div>
+                                    {{domaine.arrive|date('H:m')}}
+                                </div>
+                            </div>
+                            <div class="bloc-info mb-3 ml-3 col-3"> 
+                                <div class="round-icon">
+                                    <span class="icon-info">
+                                        <img src="{{asset('images/icons/calendar.png')}}" width="100%">
+
+                                    </span>
+                                </div> 
+                                <div class="details">
+                                    <div class="title">Heure de depart : </div>
+                                    {{domaine.depart|date('H:m')}}
+                                </div>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-5">
+                            <h3 class="text-center title-location">
+                                Localisation
+                            </h3>
+
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1975.465967424819!2d2.4260131884908267!3d48.63030947751983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5de18f93df185%3A0xf622440f20b21e7!2s202%20Rue%20Desaix%2C%2091000%20%C3%89vry-Courcouronnes!5e0!3m2!1sen!2sfr!4v1619687233141!5m2!1sen!2sfr" width="1250" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+
+                     </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+<div style="background-color : #F9F9F9;">
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h3 class="title-location mt-5 mb-4">Les Locations</h3>
+            <div class="row card-etab card-bg">
+                {% for habitat in habitats %}
+            <div class="col-3 mb-3 carte">
+                <img src="{{asset('images/habitat/'~ habitat.url)}}" width="100%">
+                <div class=" d-block p-3 col-12 content">
+                    <span class="lieu"><i class="fa fa-map-marker" aria-hidden="true"></i> {{habitat.pays}} , {{habitat.ville}}</span>
+                    <h2 class="title">{{habitat.nom}}</h2>
+                    <h2 class="title">{{habitat.idTypeHabitat.nom}}</h2>
+                    <p class="desc">
+                        {{habitat.description}}
+                    </p>
+                    <img src="{{asset('images/hr.png')}}" width="100%">
+                    <a href="{{path('habitat_domaines' , {'id':habitat.id})}}" class="badge bg-secondary mt-3 d-inline-block">Consulter la location</a>
+                </div>
+
+            </div>
+            {% endfor %}
+
+            </div>
+
+        </div>
+        <!-- Les Equipements de la-->
+        <div class="col-4">
+            <h3 class="title-location text-center mt-5 mb-4">Les Equipements</h3>
+            <div clas="col-12">
+                {% for equipement in domaine.equipement %}
+                <div class="col">
+                    <div class="p-3 border">
+                        <img src="{{asset(equipement.icon)}}" width="50px"> 
+                        {{equipement.nom}}
+                    </div>
+
+              </div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% include 'footer.html.twig' %}
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDr14B1ifiONym_r-iaU3f3z0QzD-zBwk"></script>
+<script src="{{ asset('js/map.js') }}"></script>
+<script>
+    getAddress( {{domaine.adresse}} {{domaine.ville}} );
+</script>
+{% endblock %}

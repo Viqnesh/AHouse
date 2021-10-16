@@ -1,0 +1,89 @@
+{% extends 'internaute.html.twig' %}
+
+{% block titre %} Dashboard {% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/tooplate-style.css') }}" rel="stylesheet" />                                   <!-- Templatemo style -->
+<link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome4.7.0/css/all.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenuPrincipal %}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% include 'headerLogged.html.twig' %}
+{% else %}
+{% include 'header.html.twig' %}
+{% endif %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+        <h1>{{ habitat.nom }}</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                </tr>
+                <tr>
+                    <th>NbCouchages</th>
+                    <td>{{ habitat.nbCouchages }}</td>
+                </tr>
+                <tr>
+                    <th>Capacite</th>
+                    <td>{{ habitat.capacite }}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ habitat.prix }}</td>
+                </tr>
+                <tr>
+                    <th>Pays</th>
+                    <td>{{ habitat.pays }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{ habitat.ville }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ habitat.description }}</td>
+                </tr>
+                <tr>
+                    <th>DatePublication</th>
+                    <td>{{ habitat.datePublication ? habitat.datePublication|date('Y-m-d') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    
+    
+        <button type="button" class="btn btn-light"><a href="{{ path('habitat_edit', {'id': habitat.id}) }}">Modifier</a></button>
+    
+        {{ include('habitat/_delete_form.html.twig') }}
+  
+        <button type="button" class="btn btn-light"><a href="{{ path('activite_habitat_index', {'id': habitat.id}) }}">Voir les activités à proximité</a></button>
+
+    
+    </div> <!-- container .//  -->
+</section>
+
+{% include "footer.html.twig" %}
+
+{% endblock %}
+
+{% block javascripts %}
+        <script src="{{ asset('js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+{% endblock %}

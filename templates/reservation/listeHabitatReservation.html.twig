@@ -1,0 +1,94 @@
+{% extends 'internaute.html.twig' %}
+{% block titre %} Gerer mes Habitats{% endblock %}
+
+{% block stylesheets %}
+
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/tooplate-style.css') }}" rel="stylesheet" />                                   <!-- Templatemo style -->
+<link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome4.7.0/css/all.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenuPrincipal %}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+{% include 'headerFinal.html.twig' %}
+
+
+        <!---SECTION INTRO -->
+        <section class="content" style="margin: 10%;">
+
+            <hr clas="rounded">
+
+            <div class="container">
+                <div class="heading">
+                    <h3 class="section-title">Reservations en Attente de Mes Habitats</h3>
+                </div>
+    
+                <div class="row gutter-10">
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Couchages</th>
+                                        <th>Capacite</th>
+                                        <th>Prix</th>
+                                        <th>Pays</th>
+                                        <th>Ville</th>
+                                        <th>Publication</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for habitat in habitats %}
+                                    <tr>
+                                        <td>{{ habitat.nom }}</td>
+                                        <td>{{ habitat.nbCouchages }}</td>
+                                        <td>{{ habitat.capacite }}</td>
+                                        <td>{{ habitat.prix }}</td>
+                                        <td>{{ habitat.pays }}</td>
+                                        <td>{{ habitat.ville }}</td>
+                                        <td>{{ habitat.datePublication ? habitat.datePublication|date('Y-m-d') : '' }}</td>
+                                        <td>
+                                            <a href="{{ path('reservationAttente', {'idHabitat': habitat.id}) }}">Détails</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="10">Aucun Habitat ajouté</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        
+
+    
+                    
+                </div>
+            </div>
+    
+        </section>
+        <hr clas="rounded">
+                    <!---SECTION INTRO -->
+
+</section>
+{% endblock %}
+
+{% block javascripts %}
+            <script src="{{ asset('js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+{% endblock %}

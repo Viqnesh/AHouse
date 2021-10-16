@@ -1,0 +1,111 @@
+{# /templates/produit.html.twig #}
+{% extends 'parent.html.twig' %}
+
+{% block titre %}Back-Office{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block contenuPrincipal %}
+    <div class="wrapper">
+    
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-black navbar-dark">
+        <!-- Left navbar links -->
+    
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Messages Dropdown Menu -->
+          <!-- Notifications Dropdown Menu -->
+          <li class="nav-item dropdown">
+    
+    
+    
+          <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+              <i class="fas fa-sign-out-alt"></i> Déconnexion
+            </a>
+          </li>
+          <li class="nav-item">
+            </a>
+          </li>
+        </ul>
+    
+    
+    
+      </nav>
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <nav aria-label="breadcrumb" style="text-align: right;">
+            
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Habitats</li>
+          </ol>
+        </nav>
+        
+        <!-- /.content-header -->
+    
+        <!-- Main content -->
+              <!-- ./col -->
+              <section class="col-lg-12 connectedSortable">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                    </h3>
+                    <div class="card-tools">
+                      <ul class="nav nav-pills ml-auto">
+
+                      </ul>
+                    </div>
+                    <div class="tab-habitats">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nom</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for type_habitat in type_habitats %}
+                                <tr>
+                                    <td>{{ type_habitat.id }}</td>
+                                    <td>{{ type_habitat.nom }}</td>
+                                    <td>
+                                        <a href="{{ path('type_habitat_show', {'id': type_habitat.id}) }}">Voir</a>
+                                        <a href="{{ path('type_habitat_edit', {'id': type_habitat.id}) }}">Modifier</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    
+                        <a href="{{ path('type_habitat_new') }}" class="btn btn-info">Ajouter un Type d'Habitat</a>
+                    </div>
+                    </div>
+                  </section>
+      
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+              <!-- Left col -->
+                <!-- Custom tabs (Charts with tabs)-->
+              
+                <!-- /.card --
+    
+      <!-- /.navbar -->
+    
+                {% include 'sidebar.html.twig' %}
+    <!-- jQuery -->
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

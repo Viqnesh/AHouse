@@ -1,0 +1,33 @@
+{% extends 'internaute.html.twig' %}
+
+{% block titre %} Gerer mes Habitats{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/templatemo-style.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+{% endblock %}
+
+{% block contenuPrincipal %}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% include 'headerLogged.html.twig' %}
+
+{% for location in locations %}
+<li>{{ location.id}}</li>
+<li>{{ location.idHabitat.nom}}</li>
+<li>{{ location.dateReservation|date('Y-m-d')}}</li>
+{% endfor %}
+
+{% include "footer.html.twig" %}
+
+{% else %}
+
+<h1>Vous n'êtes pas autorisé à voir cette page</h1>
+
+{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

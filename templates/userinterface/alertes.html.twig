@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+          {% include 'userinterface/tabs.html.twig' %}
+
+            <div class="col mt-3 mb-3 p-5" style="background-color: white;">
+                      {% include 'userinterface/profilehead.html.twig' %}
+                <div class="container">
+                    <div class="col-12">
+
+                        <hr>
+                    </div>
+
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a class="text-dark" href="{{path('home')}}">Accueil</a></li>
+                        <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute')}}">Mon Profil</a></li>
+                      <li class="breadcrumb-item"><a class="text-dark" href="#">Mes Alertes</a></li>
+                    </ol>
+                        <div class="text-center col-12 p-5">
+                            <h4>Mes Alertes</h4>
+                        </div>
+                        <div class="">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                  <tr>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Objet</th>
+                                    <th scope="col">Message</th>
+                                    <th scope="col">Date</th>
+
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for notif in notifs | slice(1,5) %}
+                                    <tr>
+                                        <th scope="row"><i class="far fa-envelope"></i></th>
+                                        <td>{{ notif['titre'] }}</td>
+                                        <td>{{ notif['contenu'] }}</td>
+                                        <td>{{ notif['date_publication']|date('Y-m-d') }}</td>
+
+                                  </tr>
+                                    {% endfor %}
+                                </tbody>
+                              </table>
+                              
+                        </div>
+                        
+                        </div>
+
+                </div>
+                <!-- Navigation Tabs-->
+
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

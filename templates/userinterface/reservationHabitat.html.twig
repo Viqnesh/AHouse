@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+          {% include 'userinterface/tabs.html.twig' %}
+
+            <div class="col mt-3 mb-3 p-5" style="background-color: white;">
+                      {% include 'userinterface/profilehead.html.twig' %}
+                    <div class="col-12">
+
+                        <hr>
+                    </div>
+
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a class="text-dark" href="{{path('home')}}">Accueil</a></li>
+                        <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute')}}">Mon Profil</a></li>
+                      <li class="breadcrumb-item"><a class="text-dark" href="#">Mes Alertes</a></li>
+                    </ol>
+                        <div class="text-center col-12 p-5">
+                            <h4>Réservations en Attente</h4>
+                        </div>
+                        <div class="">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Reservé le :</th>
+                                        <th>Debut</th>
+                                        <th>Fin</th>
+                                        <th>Action</th>
+                                        <th>Infos</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for location in locations %}
+                                    <tr>
+                                    <td>{{ location.idUserLocataire.login}}</td>
+                                    <td>{{ location.dateReservation|date('Y-m-d')}}</td>
+                                    <td>{{ location.dateDebut|date('Y-m-d')}}</td>
+                                    <td>{{ location.dateFin|date('Y-m-d')}}</td>
+                                    <td>
+                                        <a href="{{ path('valider', {'idLocation': location.id}) }}">Valider</a>
+
+                                    </td>
+                                    <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        Voir le profil du locataire
+                                      </button>
+                                      {% include 'userinterface/showuserprofile.html.twig' %}
+                                    </td>
+                                    </tr>
+                                    
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="10">Aucune Réservation en attente</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                              </table>
+                              
+                        </div>
+                        
+                        </div>
+
+                </div>
+                <!-- Navigation Tabs-->
+
+            </div>
+
+            
+        </div>
+    </div>
+{% endblock %}

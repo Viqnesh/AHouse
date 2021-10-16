@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+<body>
+<!--  Home Page Image + Search Form -->
+
+
+                  <div class="col-md-12 text-center p-5 hero-head-newsletter">
+                                    <h1 class="hero-title">Newsletter</h1>
+                  <nav class="text-center " aria-label="breadcrumb">
+                      <ol class="breadcrumb justify-content-center text-white">
+                        <li class="breadcrumb-item text-white" aria-current="page">Accueil</li>
+                        <li class="breadcrumb-item text-white activ" aria-current="page">Newsletter</li>
+                      </ol>
+                    </nav>
+                <p class="hero-desc">Abonnez-vous à la newsletter d'Atypik House pour ne plus rien louper !</p>
+
+                  </div>
+              </div>
+
+                <div>
+                        {{ form_start(form) }}
+                        <div class="container">
+                        <div class="row mt-5">
+                            <div class="form-group mb-3 justify-content-center row">
+                            <div class="col-3">
+                            <label for="inputPassword6" class="col-form-label">Votre e-mail : </label>
+                            </div>
+                            <div class="col-3 mb-3">
+                                {{ form_widget(form.email) }}
+                            </div>
+                            </div>
+
+
+                            <div class="form-group mb-3  justify-content-center row">
+                            <div class="col-3">
+                                <label for="inputPassword6" class="col-form-label">Prénom : </label>
+                            </div>
+                            <div class="col-3 mb-3">
+                                {{ form_widget(form.prenom) }}
+                            </div>
+                            </div>
+
+                            <div class="form-group mb-3  justify-content-center row">
+                            <div class="col-3">
+                                <label for="inputPassword6" class="col-form-label">Anniversaire : </label>
+                            </div>
+                            <div class="col-3 mb-3">
+                                {{ form_widget(form.anniversaire) }}
+                            </div>
+                            </div>
+
+                            <div class="form-group mb-3   justify-content-center row">
+                            <div class="col-3">
+                                <label for="inputPassword6" class="col-form-label">Hébergement Préferé : </label>
+                            </div>
+                            <div class="col-3 mb-3">
+                                {{ form_widget(form.hebergement) }}
+                            </div>
+                            </div>
+
+                            <div class="form-group mb-3  justify-content-center row">
+                            <div class="col-3">
+                                <label for="inputPassword6" class="col-form-label">Région : </label>
+                            </div>
+                            <div class="col-3 mb-3">
+                                {{ form_widget(form.region) }}
+                            </div>
+                            </div>
+                            <div class="form-group mb-3  justify-content-center row">
+                            <div class="col-6 mb-3 text-center">
+                                {{ form_widget(form.save, { 'label': 'Enregistrez' }) }}
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        {{ form_end(form) }}
+
+                </div>
+
+      </div>
+  </div>
+
+  </div>
+</div>
+</body>
+
+{% include 'footer.html.twig' %}
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // you may need to change this code if you are not using Bootstrap Datepicker
+        $('.js-datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    });
+</script>
+{% endblock %}

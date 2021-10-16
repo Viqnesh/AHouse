@@ -1,0 +1,298 @@
+{% extends 'internaute.html.twig' %}
+{% block titre %} Gerer mes Habitats{% endblock %}
+
+{% block stylesheets %}
+
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/tooplate-style.css') }}" rel="stylesheet" />                                   <!-- Templatemo style -->
+<link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome4.7.0/css/all.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenuPrincipal %}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+{% include 'headerFinal.html.twig' %}
+
+<section class="intro-search">
+    <div class="container">
+
+        <div class="row">
+            <div style="margin-right: auto ; margin-left:auto; display:block;margin-top:30%;background-color: white;border-radius:2%;padding:3%;;z-index:1">
+
+
+                    <div class="container ie-h-align-center-fix">
+                        <div class="row">
+                            <div class="form-search" style="font-weight: bold;">
+
+                                {{ form_start(form) }}
+                                    <div class="my-custom-class-for-errors">
+                                        {{ form_errors(form) }}
+                                    </div>
+
+                                    <div class="row">
+                                    <div class="col" style="font-size : 10px ;">
+                                        <i class="fas fa-globe-africa"></i>
+                                        {{ form_row(form.pays) }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form_row(form.capacite) }}
+                                    </div>
+                                    <div class="col">
+                                        {{ form_row(form.idTypeHabitat) }}
+                                    </div><br>
+                                        {{ form_row(form.Rechercher) }}
+                                    </div>
+                                    {{ form_end(form) }}
+                            <!---SEARCH BAR BEGIN -->
+                                    
+                                    {{ form_start(form) }}
+                                    {{ form_end(form) }}
+
+                            <!--- Search BAR END -->
+                            </div>
+
+
+                        </div>      
+                    </div>                  
+            </div>
+        </div> 
+
+    </div>
+
+</section>
+
+
+        <!---SECTION INTRO -->
+        <section class="content" style="margin-bottom: 10%;">
+
+            <hr clas="rounded">
+
+            <div class="container">
+                <div class="heading">
+                    <h3 class="section-title"></h3>
+                </div>
+    
+                <div class="row gutter-10">
+                        <div class="col-md-12">
+                            <h2 class="title title-big title-blue">
+                                Nos Meilleures Habitats
+                            </h2>
+                            
+    
+                        </div>
+                        {% for habitat in habitats |slice(0, 3)%}
+                        <div class="col-sm-6 cold-md-6 col-xl-4">
+                            <div class="bloc-rental">
+                                <div class="media-gallery">
+                                    <div class="media">
+                                        <ul>
+                                            <li>
+                                                <a href="">
+                                                    <img src="asset{{habitat.url}}" style="display: inline-block;">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="details">
+                                    <div class="toolbar">
+                                        <div class="price">
+                                            <small></small>
+                                            <strong>
+                                                <span class="value" style="font-size:15px">{{habitat.idTypeHabitat.nom}} </span>
+                                            </strong>
+                                        </div>
+                                        <div class="price">
+                                            <small>à partir de</small>
+                                            <strong>
+                                                <span class="value">{{habitat.prix}} €</span>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div class="txt">
+                                        <h2>
+                                            <a>
+                                            <span class="name">{{habitat.nom}}</span>
+                                            <span class="domain">Couchages : {{habitat.nbCouchages}}</span>
+                                            <span class="domain">Capacite : {{habitat.Capacite}}</span>
+                                            </a>
+
+                                        </h2>
+                                        <a href="{{path('product', {'id' : habitat.id})}}" class="btn btn-lg btn-starred btn-purple" style="margin-left: 50% ;margin-top: -20%;"> Voir Plus </a>
+                                        <span class="score"></span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        
+
+    
+                    
+                </div>
+            </div>
+    
+        </section>
+        <hr clas="rounded">
+                    <!---SECTION INTRO -->
+<section class="content" style="margin-bottom: 10%;">
+
+                        <div class="container">
+                            <div class="heading">
+                                <h3 class="section-title"></h3>
+                            </div>
+                
+                            <div class="row gutter-10">
+                                    <div class="col-md-12">
+                                        <h2 class="title title-big title-blue">
+                                        Nouveaux Habitats
+                                        </h2>
+                                        
+                
+                                    </div>
+                                    {% for habitat in habitats |slice(0, 3)%}
+                                    <div class="col-sm-6 cold-md-6 col-xl-4">
+                                        <div class="bloc-rental">
+                                            <div class="media-gallery">
+                                                <div class="media">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="">
+                                                                <img src="{{habitat.url}}" style="display: inline-block;">
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+            
+                                            <div class="details">
+                                                <div class="toolbar">
+                                                    <div class="price">
+                                                        <small></small>
+                                                        <strong>
+                                                            <span class="value" style="font-size:15px">{{habitat.idTypeHabitat.nom}} </span>
+                                                        </strong>
+                                                    </div>
+                                                    <div class="price">
+                                                        <small>à partir de</small>
+                                                        <strong>
+                                                            <span class="value">{{habitat.prix}} €</span>
+                                                        </strong>
+                                                    </div>
+                                                </div>
+                                                <div class="txt">
+                                                    <h2>
+                                                        <a>
+                                                        <span class="name">{{habitat.nom}}</span>
+                                                        <span class="domain">Couchages : {{habitat.nbCouchages}}</span>
+                                                        <span class="domain">Capacite : {{habitat.Capacite}}</span>
+                                                        </a>
+            
+                                                    </h2>
+                                                    <button type="submit" class="btn btn-lg btn-starred btn-purple" style="    margin-left: 50%;
+                                                    margin-top: -20%;">Voir Plus</button>
+            
+                                                    <span class="score"></span>
+            
+                                                </div>
+            
+                                            </div>
+            
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    
+        
+                
+                                
+                            </div>
+                        </div>
+                
+                    </section>
+<hr class="rounded">
+
+                  <!---SECTION INTRO -->
+<section class="content" style="margin-bottom: 10%;background-color:#b0f2b6">
+                    <div class="container">
+                        <div class="heading">
+                            <h3 class="section-title"></h3>
+                        </div>
+            
+                        <div class="row gutter-10">
+                                <div class="col-md-12">
+                                    <h2 class="title title-big title-blue" style="color : white;">
+                                        Qui Sommes-Nous ?
+                                    </h2>
+                                    
+                                    <p style="width : 100% ;color: white; text-align : center ;
+                                    font-weight: 900;padding : 3% ;">
+                                        AtypikHouse se situant dans la localité de Pierrefonds, dans le département de l’Oise et qui cherche à élargir son champ en France et en Europe, est une société évoluant dans la location d’habitat alternatifs.
+Créée en 2018, cette société est composée de 3 associés partageant les mêmes passions pour les voyages, l‘habitat alternatif et la vie en harmonie avec la nature.
+
+                                
+                                                                            AtypikHouse, c’est une société de location d’habitat alternatifs, elle a vu le jour dans un contexte où le monde imaginaire et la beauté de la nature ne sèchent de séduire un grand nombre de public, avec des maisons de belles architectures, des cabanes en plein milieu de forêt. Ce qui pousse beaucoup de monde à sortir de leur zone de confort habituel pour poursuivre une aventure dans ces maisons d’insolite et changer d’air durant les vacances afin de profiter et vivre une expérience épanouissante et inoubliable.
+
+        
+                                                                            Cette envie ressenti par un grand nombre de personnes de vivre des jours meilleurs dans le monde de l’habitat insolite, a suscité l’idée de création d’entreprise chez 3 associés qui partagent les mêmes passions pour les voyages, l’habitat alternatif et la vie en harmonie avec la nature. Et ainsi, partant d’une bonne base de relation amicale tout en réunissant leurs moyens techniques, financiers et compétences, ils ont décidé d’investir dans la location d’habitations insolites, comme les cabanes dans les arbres, les yourtes ou les cabane flottantes…
+
+                                    </p>
+                                </div>
+                                
+    
+            
+                            
+                        </div>
+                    </div>
+
+                </section>
+        <!---SECTION INTRO -->
+<section class="content" style="margin-bottom: 10%;">
+
+            <div class="container">
+                <div class="heading">
+                    <h3 class="section-title"></h3>
+                </div>
+    
+                <div class="row gutter-10">
+                        <div class="col-md-12">
+                            <h2 class="title title-big title-blue">
+                                C'est à votre tour !
+                            </h2>
+                            <a href="{{path('habitat_new')}}" class="btn btn-lg btn-starred btn-purple" style="width : 35% ; margin-left :32% ;">Publiez votre annonce</a>
+
+    
+                        </div>
+
+                        
+
+    
+                    
+                </div>
+            </div>
+    
+</section>
+{% endblock %}
+
+{% block javascripts %}
+            <script src="{{ asset('js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+{% endblock %}

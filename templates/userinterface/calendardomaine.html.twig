@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block stylesheets %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
+{% endblock %}
+
+{% block body %}
+
+{% include 'header.html.twig' %}
+
+{% set dateDesactivees = [] %}
+
+    {% for dateDD in dispoDomaine %}
+      {% set dateDesactivees = dateDesactivees|merge([ dateDD.dateDispo|date('Y-m-d')]) %}
+    {% endfor %}
+
+<div class="js-user-rating" data-is-authenticated="{{dateDesactivees|json_encode|e('html_attr')}}">
+    <!-- ... -->
+    </div>
+<div class="container">
+    <div class="row">
+
+              <!-- ... -->
+        </div>
+        <div class="col-12 m-5">
+          {{ form_start(form) }}
+                    <ul class="calendar-date" data-prototype="{{ form_widget(form.dispoDomaine.vars.prototype)|e('html_attr') }}" data-index="{{ form.dispoDomaine|length }}">
+                  <button type="button" id="ajout-occ" class="btn btn-primary ajoux-boux" data-collection-holder-class="calendar-date"><i class="bi bi-plus-circle"></i> Ajouter</button>
+                  {% for dateD in  form.dispoDomaine %}
+                      <li class="m-3 p-3">                          
+                          <span class="mb-3">{{ form_label(dateD.dateDispo, "Information sur l'Occupant", {'label_attr': {'class': 'mb-2'}}) }}</span>
+                          {{ form_widget(dateD.dateDispo) }}
+                      </li>
+
+                  {% endfor %}
+                    </ul>
+                    <div class="col-12 d-inline-flex m-4 justify-content-between">
+                    {{form_row(form.save, { 'label': 'Suivant' })}}
+                    </div>
+                    <div class="js-datepicker"></div>
+          {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>                       
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>                     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
+<script>
+(function($){
+$.fn.datepicker.dates['fr'] = {
+days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+daysMin: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+monthsShort: ["janv.", "févr.", "mars", "avril", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+today: "Aujourd'hui",
+monthsTitle: "Mois",
+clear: "Effacer",
+weekStart: 1,
+format: 'dd/mm/yyyy'
+};
+
+
+
+
+
+
+}(jQuery));
+
+
+let datesDesactivees = $('.js-user-rating').data('isAuthenticated');
+
+$('.js-datepicker').datepicker({
+language: 'fr',
+autoclose: false,
+todayHighlight: false,
+format: 'dd/mm/yyyy',
+multidate: true,
+beforeShowDay: function(date) {
+      var allDates = date.getFullYear() + "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2);
+      if (datesDesactivees.indexOf(allDates) != -1) {
+        return false ;
+      } else {
+        return true ;
+      }
+}
+}).on('changeDate', function(e) {
+        var dateCh ;
+        var i = $('.calendar-date').data('index') - 1 ;
+        dateCh = e.format() ;
+        console.log(dateCh);
+        console.log(e);
+        $('#domaine_calendrier_dispoDomaine_'+ i +'_dateDispo').val(dateCh).trigger('change');
+});
+
+
+    // Get the ul that holds the collection of tags
+    var $tagsCollectionHolder = $('ul.calendar-date');
+    $tagsCollectionHolder.find('li').each(function() {
+        addTagFormDeleteLink($(this));
+    });
+
+    $tagsCollectionHolder.data('index', $tagsCollectionHolder.find('input').length);
+    // Calcul du prix TTC
+    // add a delete link to all of the existing tag form li elements
+
+    $('tbody').on('click', "td.day:not(.disabled)" , function(e) {
+        var $collectionHolderClass = $('.ajoux-boux').data('collectionHolderClass');
+        // add a new tag form (see next code block)
+        addFormToCollection($collectionHolderClass);
+
+    })
+
+    function addFormToCollection($collectionHolderClass) {
+    // Get the ul that holds the collection of tags
+    var $collectionHolder = $('.' + $collectionHolderClass);
+    // Get the data-prototype explained earlier
+    var prototype = $collectionHolder.data('prototype');
+
+    // get the new index
+    var index = $collectionHolder.data('index');  
+
+    var newForm = prototype;
+
+    newForm = newForm.replace(/__name__/g, index);
+
+    // increase the index with one for the next item
+    $collectionHolder.data('index', index + 1);
+
+    // Display the form in the page in an li, before the "Add a tag" link li
+    var $newFormLi = $('<li class="m-3 p-3"></li>').append(newForm);
+    // Add the new form at the end of the list
+    $collectionHolder.append($newFormLi);
+
+    addTagFormDeleteLink($newFormLi, $collectionHolderClass);
+    }
+
+
+    function addTagFormDeleteLink($tagFormLi, $collectionHolderClass) {
+            var $collectionHolder = $('.' + $collectionHolderClass);
+            var index = $collectionHolder.data('index');  
+
+            var $removeFormButton = $('<button class="btn btn-outline-danger mt-3" type="button"> <i class="bi bi-trash"></i> Supprimer</button>');
+            $tagFormLi.append($removeFormButton);
+
+            $removeFormButton.on('click', function(e) {
+                // remove the li for the tag form
+                $collectionHolder.data('index', index - 1);
+                $tagFormLi.remove();
+
+            });
+    }
+</script>
+{% endblock %}

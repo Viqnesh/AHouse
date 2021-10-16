@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+<div class="d-flex main-wood-bg">
+    <div class="container">
+        <div class="row card-etab justify-content-center mb-5 p-4 card-bg">
+                <div class="col-12 mb-5 text-center">
+                    <h1 class="titleAtypik">Nos Hébérgements</h1>
+                </div>             
+        </div>
+
+
+        
+    </div>
+</div>
+
+<div class="container justify-content-center mt-5 mb-5">
+    <div class="row justify-content-center">
+{% for type in types %}
+
+    <div class="card m-3 shadow" style="width: 25rem;border-radius:30px;">
+  <img class="card-img-top mt-2" src="{{asset(type.image)}}" alt="Card image cap" style="    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;max-height:210px;">
+  <div class="card-body">
+    <h5 class="card-title">{{type.nom}}</h5>
+    <p class="card-text">{{type.description}}</p>
+    <hr>
+    <div class="text-center">
+    <a href="#" class="btn shadow-sm btn-lg btn-primary text-center button-search-region btn-vert" style="width: 63%;">Voir les Habitats</a>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+    </div>
+
+</div>
+</div>
+
+
+{% include 'footer.html.twig' %}
+
+{% endblock %}

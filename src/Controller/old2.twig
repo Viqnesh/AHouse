@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+<img class="rent-banner" src="{{asset('images/activite/'~ activite.typeActivite.image)}}">
+<div class="d-flex rent-content" style="background-color: background-color : #F9F9F9;">
+
+    <div class="col-12">
+        <div class="col-12 p-5">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" >
+                          <li class="breadcrumb-item active" aria-current="page">Accueil</li>
+                          <li class="breadcrumb-item active" aria-current="page">Les Domaines</li>
+                          <li class="breadcrumb-item active" aria-current="page">{{habitat.nom}}</li>
+                          <li class="breadcrumb-item active" aria-current="page">{{activite.typeActivite.nom}}</li>
+                        </ol>
+                      </nav>
+                    </div>
+                    <div class="d-flex col-12 ml-5">
+                        <h1 class="font-weight-700">{{activite.typeActivite.nom}}</h1>
+                    </div>
+                        <span class="lieu"><i class="pinIcon fa fa-map-marker" aria-hidden="true"></i>{{activite.typeActivite.adresse}}</span>
+
+
+
+        </div>
+
+    </div>
+    <div class="col-12 p-5">
+        <div class="container">
+            <div class="row">
+                <h3 class="mb-3 title-location">Description</h3>
+            </div>
+            <div class="container">
+                {{activite.typeActivite.description}}
+              </div>
+              
+        </div>
+    </div>
+    <div class="col-12 p-5">
+        <div class="container">
+            <div class="row">
+                <h3 class="mb-3 title-location">Gallerie</h3>
+            </div>
+            <div class="container">
+                {% if photos is empty %}
+                    <p>Aucune photo n'a été publié pour cette activité</p>
+                {% else %}
+                <div class="row g-1">
+                  {% for photo in photos %}
+                  <div class="col-3">
+                    <div class="p-1 border bg-light"><img src="{{asset(photo.url)}}" width="100%"></div>
+                  </div>
+                  {% endfor %}
+                </div>
+                {% endif %}
+              </div>
+              
+        </div>
+    </div>
+    <div class="col-12 p-5">
+        <div class="container">
+            <div class="row">
+                <h3 class="mb-3 title-location">l'Avis de nos clients</h3>
+
+            </div>
+            <div class="container">
+                <div class="row g-2">
+                  <div class="col-4">
+                    {% if comments is empty %} 
+                    <p>Aucun commentaire à été publié pour cette activité</p>
+                    {% else %}
+                    <div class="p-3 border bg-light">
+                        <div class="media">
+                        {% for comment in comments %}
+                        <div class="col">
+                            <h5>{{comment.idUser.nom}} {{comment.idUser.prenom}}</h5>
+                            <span class="appr">{{comment.titre}}</span>
+                        </div>
+                        </div>
+
+
+                        <hr>
+                        <p class="comment">
+                            {{comment.contenu}}
+                        </p>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+
+                </div>
+              </div>
+              
+        </div>
+    </div>
+</div>
+<div style="background-color : #F9F9F9;">
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="title-location mt-5 mb-4">L'habitat</h3>
+            <div class="row card-etab card-bg">
+            <div class="col-3 mb-3 carte">
+                <img src="{{asset('images/habitat/'~ habitat.url)}}" width="100%">
+                <div class=" d-block p-3 col-12 content">
+                    <span class="lieu mr-4"><i class="pinIcon fa fa-map-marker" aria-hidden="true"></i>{{habitat.idDomaine.adresse}}</span>
+                    <h2 class="title mt-3">{{habitat.nom}}</h2>
+                    <p class="desc">
+                    {{habitat.description}}
+                    </p>
+                    <img src="{{asset('images/hr.png')}}" width="100%">
+                    <a href="{{path('habitat_domaines' , {'id' : habitat.id})}}" class="btn-atypik badge bg-secondary mt-3 d-inline-block">Voir l'habitat</a>
+                </div>
+
+            </div>
+            </div>
+
+        </div>
+        <div class="col-4">
+        </div>
+
+    </div>
+</div>
+</div>
+{% include 'footer.html.twig' %}
+
+{% endblock %}

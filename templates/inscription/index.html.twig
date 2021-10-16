@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+<div class="container">
+
+<div class="row">
+<div class="bg-white mt-5 shadow mb-5" style="border-radius:30px;">
+<h1 class="text-center mt-5 mb-5">Inscription</h1>
+{{form_start(form)}}
+<form>
+  <div class="row m-4">
+    <div class="col">
+      <label for="inputEmail4">Adresse E-mail</label>
+
+    {{ form_widget(form.email) }}
+    </div>
+    <div class="col">
+    </div>
+  </div>
+  <div class="row m-4">
+    <div class="col">
+      <label for="inputEmail4">Mot de Passe</label>
+
+    {{ form_widget(form.password.first) }}
+    </div>
+    <div class="col">
+      <label for="inputEmail4">Entrez à nouveau votre mot de passe</label>
+
+    {{ form_widget(form.password.second) }}
+    </div>
+  </div>
+  <div class="row m-4">
+    <div class="col">
+      <label for="inputEmail4">Nom</label>
+
+    {{ form_widget(form.nom) }}
+    </div>
+    <div class="col">
+      <label for="inputEmail4">Prénom</label>
+
+    {{ form_widget(form.prenom) }}
+    </div>
+  </div>
+    <div class="row m-4">
+    <div class="col">
+      <label for="inputEmail4">Adresse</label>
+
+    {{ form_widget(form.adresse) }}
+    </div>
+  </div>
+  <div class="row m-4">
+    <div class="col">
+      <label for="inputEmail4">Ville</label>
+
+    {{ form_widget(form.ville) }}
+    </div>
+      <div class="col">
+      <label for="inputEmail4">Code Postal</label>
+
+    {{ form_widget(form.cp) }}
+    </div>
+  </div>
+  <div class="row m-4">
+    <div class="col">
+        <label for="inputEmail4">Téléphone</label>
+    {{ form_widget(form.telephone) }}
+    </div>
+    
+    <div class="col">
+      <label for="inputEmail4">Date de Naissance</label>
+    {{ form_widget(form.dateNaissance) }}
+    </div>
+  </div>
+    <div class="row m-4">
+    <label for="exampleFormControlInput1">Sexe</label>
+    <div class="col">
+        {{ form_widget(form.genre) }}
+
+   </div>
+    <div class="col">
+    </div>
+  </div>
+  <div class="row m-4">
+    <div class="col">
+      <label for="inputEmail4">Biographie</label>
+        {{ form_widget(form.biographie) }}
+    </div>
+
+  </div>
+  <div class="text-center">
+        {{ form_widget(form.Validez) }}
+  </div>
+</form>
+
+{{form_end(form)}}
+
+</div>
+</div>
+</div>
+
+
+
+{% include 'footer.html.twig' %}
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>                       
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>                     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
+<script>
+(function($){
+$.fn.datepicker.dates['fr'] = {
+days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+daysMin: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+monthsShort: ["janv.", "févr.", "mars", "avril", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+today: "Aujourd'hui",
+monthsTitle: "Mois",
+clear: "Effacer",
+weekStart: 1,
+format: "dd/mm/yyyy"
+};
+}(jQuery));
+let datesEnabled = $('.js-user-rating').data('isAuthenticated') ;
+let datesOccupes = $('.js-date-occupe').data('isAuthenticated') ;
+$('.calendate').datepicker({
+language: 'fr',
+autoclose: true,
+todayHighlight: false,
+});
+
+
+</script>
+{% endblock %}

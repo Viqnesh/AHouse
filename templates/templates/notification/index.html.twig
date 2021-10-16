@@ -1,0 +1,48 @@
+{% extends 'internaute.html.twig' %}
+{% block titre %} Gerer mes Habitats{% endblock %}
+
+{% block stylesheets %}
+
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/tooplate-style.css') }}" rel="stylesheet" />                                   <!-- Templatemo style -->
+<link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome4.7.0/css/all.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenuPrincipal %}
+
+<section class="col-lg-12 connectedSortable" style="margin : 15% ;">
+    <!-- Custom tabs (Charts with tabs)-->
+    <h2 class="title" style="text-align : center ; font-size : 25px ;">Notifications </h2>
+    {{ app.session.get('notifs') }}
+          <table class="table table-borderless"style="margin-right : 15%;width:50%;">
+            <thead>
+              <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">contenu</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for notif in notifs %}
+              <tr>
+
+                  <td>{{ notif['titre'] }}</td>
+                  <td>{{ notif['contenu'] }}</td>
+            </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+      </section>
+      {% include 'footer.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

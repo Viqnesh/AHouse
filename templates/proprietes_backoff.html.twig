@@ -1,0 +1,112 @@
+{# /templates/produit.html.twig #}
+{% extends 'parent.html.twig' %}
+
+{% block titre %}Back-Office{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block contenuPrincipal %}
+    <div class="wrapper">
+    
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-black navbar-dark">
+        <!-- Left navbar links -->
+    
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Messages Dropdown Menu -->
+          <!-- Notifications Dropdown Menu -->
+          <li class="nav-item dropdown">
+    
+    
+    
+          <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                <i class="fas fa-sign-out-alt"></i> Déconnexion
+            </a>
+          </li>
+          <li class="nav-item">
+            </a>
+          </li>
+        </ul>
+    
+    
+    
+      </nav>
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <nav aria-label="breadcrumb" style="text-align: right;">
+            
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Proprietes</li>
+          </ol>
+        </nav>
+        
+        <!-- /.content-header -->
+    
+        <!-- Main content -->
+              <!-- ./col -->
+              <section class="col-lg-12 connectedSortable">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                      <a href="{{path('proprietes/add')}}"><button type="button" class="btn btn-info"><i class="fas fa-plus-circle"></i> Ajouter Une nouvelle propriété</button></a>
+                    </h3>
+                    <div class="card-tools">
+                      <ul class="nav nav-pills ml-auto">
+
+                      </ul>
+                    </div>
+                    <div class="tab-habitats">
+                      <table class="table table-borderless">
+                        <thead>
+                          <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Obligatoire</th>
+                            <th scope="col">Type d'Habitat</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for propriete in proprietes %}
+                          <tr>
+                              <td>{{ propriete.id}}</td>
+                              <td>{{ propriete.nom}}</td>
+                              <td>{{ propriete.type}}</td>
+                              <td>{{ propriete.Obligatoire}}</td>
+                              <td>{{ propriete.idTypeHabitat}}</td>
+                              <td><a href="{{path('proprietes_edit', {'id': propriete.id})}}">Modifier</a></td>
+                              <td><a href="{{path('proprietes_delete', {'id': propriete.id})}}">Supprimer</a></td>
+
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                    </div>
+                  </section>
+      
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+              <!-- Left col -->
+                <!-- Custom tabs (Charts with tabs)-->
+              
+                <!-- /.card --
+    
+      <!-- /.navbar -->
+    
+ {% include 'sidebar.html.twig' %}
+    
+    <!-- jQuery -->
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

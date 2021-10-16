@@ -1,0 +1,217 @@
+{# /templates/produit.html.twig #}
+{% extends 'parent.html.twig' %}
+
+{% block titre %}Back-Office{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block contenuPrincipal %}
+    <div class="wrapper">
+    
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-black navbar-dark">
+        <!-- Left navbar links -->
+    
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Messages Dropdown Menu -->
+          <!-- Notifications Dropdown Menu -->
+          <li class="nav-item dropdown">
+    
+    
+    
+          <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="{{path('app_logout')}}" role="button">
+              Déconnexion
+            </a>
+          </li>
+          <li class="nav-item">
+            </a>
+          </li>
+        </ul>
+    
+    
+    
+      </nav>
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+          </ol>
+        </nav>
+        
+        <!-- /.content-header -->
+    
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box"  style="background-color: lightgreen;">
+                  <div class="inner">
+                    <h1>{{users}}</h1>
+    
+                    <p>Utilisateurs inscrits</p>
+                  </div>
+                  <div class="icon">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box" style="background-color: lightgreen;">
+                  <div class="inner">
+                    <h1>{{biens}}</h1>
+    
+                    <p>Habitats enregistrés</p>
+                  </div>
+                  <div class="icon">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box" style="background-color: lightgreen;">
+                  <div class="inner">
+                    <h1>{{locations}}</h1>
+    
+                    <p>Réservations validés</p>
+                  </div>
+                  <div class="icon">
+                  </div>
+                </div>
+              </div>
+              <!-- ./col -->
+              <section class="col-lg-12 connectedSortable">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                      Derniers Habitats Enregistrés
+                    </h3>
+                    <div class="card-tools">
+                      <ul class="nav nav-pills ml-auto">
+
+                      </ul>
+                    </div>
+                    <div class="tab-habitats">
+                      <table class="table table-borderless">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Type d'Habitat</th>
+                            <th scope="col">Publié le</th>
+                            <th scope="col">Posté par</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for habitat in habitats | slice(0,5) %}
+                          <tr>
+                            <td>{{ habitat.nom}}</td>
+                            <td>{{ habitat.prix}}</td>
+                            <td>{{ habitat.idTypeHabitat.nom}}</td>
+                            <td>{{ habitat.datePublication|date('Y-m-d')}}</td>
+                            <td>{{ habitat.proprietaire.nom}}</td>
+
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                    </div>
+                  </section>
+                  <section class="col-lg-6 connectedSortable">
+                    <!-- Custom tabs (Charts with tabs)-->
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">
+                          Derniers Proprietes Ajoutées
+                        </h3>
+                        <div class="card-tools">
+                          <ul class="nav nav-pills ml-auto">
+                            
+                          </ul>
+                        </div>
+                        <div class="tab-habitats">
+                          <table class="table table-borderless">
+                            <thead>
+                              <tr>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Obligatoire</th>
+                                <th scope="col">Type d'Habitat</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for propriete in proprietes | slice(0,5) %}
+                              <tr>
+                                <td>{{ propriete.nom}}</td>
+                                <td>{{ propriete.type}}</td>
+                                <td>{{ propriete.obligatoire}}</td>
+                                <td>{{ propriete.idTypeHabitat}}</td>
+    
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        </div>
+                      </section>
+                      <section class="col-lg-6 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">
+                              Derniers Commentaire Postés
+                            </h3>
+                            <div class="card-tools">
+                              <ul class="nav nav-pills ml-auto">
+        
+                              </ul>
+                            </div>
+                            <div class="tab-habitats">
+                              <table class="table table-borderless">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Contenue</th>
+                                    <th scope="col">Posté par</th>
+                                    <th scope="col">Habitat</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {% for comment in comments | slice(0,5) %}
+                                  <tr>
+                                    <td>{{ comment.contenu}}</td>
+                                    <td>{{ comment.idUser.login}}</td>
+                                    <td>{{ comment.IdHabitatIdCommentaire.nom}}</td>
+        
+                                  </tr>
+                                  {% endfor %}
+                                </tbody>
+                              </table>
+                            </div>
+                            </div>
+                          </section>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+              <!-- Left col -->
+                <!-- Custom tabs (Charts with tabs)-->
+              
+                <!-- /.card --
+    
+      <!-- /.navbar -->
+    
+      <!-- Main Sidebar Container -->
+ {% include 'sidebar.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

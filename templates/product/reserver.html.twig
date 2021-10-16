@@ -1,0 +1,257 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+
+  <div class="container bg-white rounded shadow-sm">
+    <div class="row justify-content-center mt-3 mb-3 p-5">
+      <div class="col-12 justify-content-center mb-5">
+
+      
+          <h1 class="h3 mb-5 font-weight-normal text-center">Reservation</h1>
+          <div class="container">
+            <div class="row mb-3 text-center">
+              <div class="col-sm fs-3 steps">
+                <i class="bi bi-people"></i> Occupants
+              </div>
+              <div class="col-sm fs-3 steps-av">
+                <i class="bi bi-ui-checks"></i> Coordonnées
+              </div>
+              <div class="col-sm fs-3 steps-av">
+                <i class="bi bi-credit-card"></i> Paiement
+              </div>
+            </div>
+          </div>
+          <div class="progress shadow-sm" style="height: 40px;">
+            <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar progress-bar-striped progress-bar-animated" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            
+            </div>
+          </div>
+      </div>
+    <div class="col-7 bg-white border p-5 shadow-sm rounded-left">
+      <h3 class="h3 fs-3 steps booking-tab-title ml-3 text-center"> <i class="bi bi-people"></i> Occupants </h3>
+      <hr>
+      <div class="p-3">
+        <h5>Enregistrement des occupants</h5>
+        <p class="font-italic">Nombre maximum d'occupants : {{habitats.capacite}} personnes<p>
+        <div class="js-nb-personnes" data-is-authenticated="{{habitats.capacite}}">
+            <!-- ... -->
+        </div>
+        <div class="jprix" data-is-authenticated="{{habitats.prix}}">
+            <!-- ... -->
+        </div>
+        <div class="jnuits" data-is-authenticated="{{ nuits|date()}}">
+            <!-- ... -->
+        </div>
+  
+          {{ form_start(form) }}
+                  <ul class="occupant-recap" data-prototype="{{ form_widget(form.occupants.vars.prototype)|e('html_attr') }}" data-index="{{ form.occupants|length }}">
+                  <button type="button" id="ajout-occ" class="btn btn-primary add_item_link" data-collection-holder-class="occupant-recap"><i class="bi bi-plus-circle"></i> Ajouter</button>
+                  {% for occupant in  form.occupants %}
+                      <li class="m-3 p-3">                          
+                          <span class="mb-3">{{ form_label(occupant.type, "Information sur l'Occupant", {'label_attr': {'class': 'mb-2'}}) }}</span>
+                          {{ form_widget(occupant.type, {'attr': {'class': 'mt-2 cat-age'}} ) }}
+
+                          <small>{{ form_help(occupant.type ) }}</small>
+
+                          <div class="form-error">
+                              {{ form_errors(occupant.type ) }}
+                          </div>
+                      </li>
+
+                  {% endfor %}
+
+
+                      </ul>
+                    <div class="col-12 d-inline-flex m-4 justify-content-between">
+                    <input type="button" value="Précédent" disabled="true" class="btn prev-button stripe-button mr-5" onclick="history.back()">
+                    {{form_row(form.save, { 'label': 'Suivant' })}}
+                    </div>
+          {{ form_end(form) }}
+      </div>
+
+
+
+    </div>
+    <div class="col-4 shadow-sm bg-info border p-4 infos-recap rounded-right">
+    <h5 class="mb-3">Récapitulatif</h5>
+    <table class="table mt-4" style="color:white;">
+      <thead>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Date d'arrivée</td>
+          <td>{{ depart|date("F jS") }}</td>
+        </tr>
+        <tr>
+          <td>Date de départ</td>
+          <td>{{ arrivee|date("F jS") }}</td>
+        </tr>
+        <tr>
+          <td>Nombre d'occupants</td>
+          <td class="js-nb-occupant-choisi">Larry</td>
+        </tr>
+        <tr>
+          <td>Nombre de nuits</td>
+          <td>{{ nuits|date()}}</td>
+        </tr>
+          <tr>
+          <th>Total</th>
+          <th class="js-prix-ttc">Larry</th>
+        </tr>
+      </tbody>
+    </table>
+      <h5 class="mb-3">Habitat Choisi</h5>
+      <table class="table mt-4" style="color:white;">
+      <thead>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nom de l'habitat</td>
+          <td>{{habitats.nom}}</td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td>{{habitats.idTypeHabitat.nom}}</td>
+        </tr>
+        <tr>
+          <td>Prix / Nuit</td>
+          <td>{{habitats.prix}} € </td>
+        </tr>
+      </tbody>
+    </table>
+      <img class="mt-5" src="{{asset('images/habitat/'~ habitats.url)}}" width="100%">
+
+    </div>
+  </div>
+</div>
+{% include 'footer.html.twig' %}
+
+{% endblock %}
+
+
+{% block javascripts %}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+$(document).ready( function() {
+    $(".progress-bar").animate({
+        width: "34%"
+    }, 900);
+      $(".prev-button").html(
+        `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+      );
+});
+
+    
+    
+    
+    </script>
+    <script type="text/javascript">
+    jQuery(document).ready(function() {
+    // Get the ul that holds the collection of tags
+    var $tagsCollectionHolder = $('ul.occupant-recap');
+    var occupantcoll = $('li');
+    var $i = 0 ;
+    var $nbpersonnes = $('.js-nb-personnes').data('isAuthenticated');
+    // Calcul du prix TTC
+    var price = $('.jprix').data('isAuthenticated');
+    var $nuits = $('.jnuits').data('isAuthenticated');
+    var nuits = parseInt($nuits);
+    var prixttc = price * nuits ;
+    $("th.js-prix-ttc").html(prixttc + " € ");
+    $("td.js-nb-occupant-choisi").html(occupantcoll.length);
+
+
+    var $nboccupant = 0;
+    console.log(price , nuits);
+    console.log("Prix TTC " + prixttc);
+    // add a delete link to all of the existing tag form li elements
+    $tagsCollectionHolder.find('li').each(function() {
+        addTagFormDeleteLink($(this));
+    });
+    // count the current form inputs we have (e.g. 2), use that as the new
+    // index when inserting a new item (e.g. 2)
+    $tagsCollectionHolder.data('index', $tagsCollectionHolder.find('input').length);
+ 
+    $('body').on('click', '.add_item_link', function(e) {
+        var $collectionHolderClass = $(e.currentTarget).data('collectionHolderClass');
+        // add a new tag form (see next code block)
+        addFormToCollection($collectionHolderClass);
+    })
+
+    });
+    function addFormToCollection($collectionHolderClass) {
+    // Get the ul that holds the collection of tags
+    var $collectionHolder = $('.' + $collectionHolderClass);
+    console.log($collectionHolder);
+    // Get the data-prototype explained earlier
+    var prototype = $collectionHolder.data('prototype');
+
+    // get the new index
+    var index = $collectionHolder.data('index');
+
+    var newForm = prototype;
+
+    newForm = newForm.replace(/__name__/g, index);
+
+    // increase the index with one for the next item
+    $collectionHolder.data('index', index + 1);
+
+    // Display the form in the page in an li, before the "Add a tag" link li
+    var $newFormLi = $('<li class="m-3 p-3"></li>').append(newForm);
+    // Add the new form at the end of the list
+    $collectionHolder.append($newFormLi);
+    addTagFormDeleteLink($newFormLi);
+
+  }
+
+  
+  function addTagFormDeleteLink($tagFormLi) {
+        var $removeFormButton = $('<button class="btn btn-outline-danger mt-3" type="button"> <i class="bi bi-trash"></i> Supprimer</button>');
+        $tagFormLi.append($removeFormButton);
+
+        $removeFormButton.on('click', function(e) {
+            // remove the li for the tag form
+            $tagFormLi.remove();
+
+        });
+    }
+    </script>
+
+
+
+
+
+    <script type="text/javascript">
+    var stripe = Stripe("pk_test_51Hee2yJHgf7eKHPKI0XyOYXYA50HuEke5h8BYFUE6hBNBQRKc1x9wmkRPOYdlsZVJf89fh8gLuhr4dePNf5ck4PZ00lVVwQX2u");
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function () {
+      fetch("{{path('checkout')}}", {
+        method: "POST",
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+          // If redirectToCheckout fails due to a browser or network
+          // error, you should display the localized error message to your
+          // customer using error.message.
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+  </script>
+  {% endblock %}

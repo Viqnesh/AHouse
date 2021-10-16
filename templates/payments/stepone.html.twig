@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resérvation - Paiement{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+<div class="d-flex main-wood-bg">
+    <div class="container">
+        <div class="row card-etab justify-content-center mb-5 p-4 card-bg">
+                <div class="col-12 mb-5 text-center">
+                    <h1 class="titleAtypik">Liste de nos établissements</h1>
+                </div>
+                {% for domaine in domaines %}
+                <div class="col-3 mb-3 carte">
+                    <img src="{{asset('images/domaines/'~ domaine.image)}}" width="100%">
+                    <div class=" d-block p-3 col-12 content">
+                        <span class="lieu"><i class="pinIcon fa fa-map-marker" aria-hidden="true"></i>{{domaine.ville}} ,{{domaine.pays}}</span>
+                        <h2 class="title">{{domaine.nom}}</h2>
+                        <p class="desc">
+                            {{domaine.description}}
+                        </p>
+                        <img src="{{asset('images/hr.png')}}" width="100%">
+                        <a href="{{path('domaine_details' , { 'id': domaine.id })}}" class="badge bg-secondary mt-3 d-inline-block">Voir les habitats porposés</a>
+                    </div>
+                {% endfor %}
+
+                </div>
+               
+ 
+  
+        </div>
+    </div>
+</div>
+
+
+
+{% include 'footer.html.twig' %}
+
+{% endblock %}

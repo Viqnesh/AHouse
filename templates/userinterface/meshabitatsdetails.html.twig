@@ -1,0 +1,234 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+          {% include 'userinterface/tabs.html.twig' %}
+
+            <div class="col mt-3 mb-3 p-5" style="background-color: white;">
+                      {% include 'userinterface/profilehead.html.twig' %}
+                    <div class="col-12">
+
+                        <hr>
+                    </div>
+
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('home')}}">Accueil</a></li>
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute')}}">Mon Profil</a></li>
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute_domaine')}}">Mon Domaine</a></li>
+                        </ol>
+                    </nav>
+
+
+
+                        <div class="col-12 mt-3">
+                            <div class="col-3" style="margin-left:80%;">
+                                <button class="btn-atypik-house"><a href="{{path('internaute_habitats_edit' , { 'id': habitat.id })}}">Modifier l'habitat</a></button>
+
+                            </div>
+                        </div>
+                        <div class="text-center col-12 p-5">
+                            <h4>{{habitat.nom}}</h4>
+                        </div>
+                        <div class="row border border-dark">
+                        <div class="col-4 mb-3">
+                            <div class=" d-block p-3 col-12 content">
+                                <img src="{{asset('images/habitat/'~ habitat.url)}}" width="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 ml-3 mb-2 p-4">
+                            <h4 class="text-center">{{habitat.nom}}</h4>
+                            <hr>
+                            <div class="row">
+                            <div class="d-flex col-12">
+                            <div class="bloc-info mb-3 ml-3 col-6"> 
+                                <div class="round-icon">
+                                    <span class="icon-info">
+                                        <img src="{{asset('images/icons/bed.png')}}" width="100%">
+
+                                    </span>
+                                </div> 
+                                <div class="details">
+                                    <div class="title">Nombre de Couchages : </div>
+                                    {{habitat.nbcouchages}} Lit(s)
+                                </div>
+                            </div>
+                            <div class="bloc-info mb-3 ml-3c col-6"> 
+                                <div class="round-icon">
+                                    <span class="icon-info">
+                                        <img src="{{asset('images/icons/family.png')}}" width="100%">
+
+                                    </span>
+                                </div> 
+                                <div class="details">
+                                    <div class="title">Capacité d'accueilement : </div>
+                                    {{habitat.capacite}} personnes
+                                </div>
+                            </div>
+                            </div>
+                            <div class="d-flex col-12">
+    
+                            <div class="bloc-info mb-3 ml-3 col-6"> 
+                                <div class="round-icon">
+                                    <span class="icon-info">
+                                        <img src="{{asset('images/icons/tag.png')}}" width="100%">
+
+                                    </span>
+                                </div> 
+                                <div class="details">
+                                    <div class="title">Prix : </div>
+                                    {{habitat.prix}} €
+                                </div>
+                            </div>
+                            <div class="bloc-info mb-3 ml-3 col-6"> 
+                                <div class="round-icon">
+                                    <span class="icon-info">
+                                    <img src="{{asset('images/icons/camping.png')}}" width="100%">
+
+                                    </span>
+                                </div> 
+                                <div class="details">
+                                    <div class="title">Type d'habitat : </div>
+                                    {{habitat.idTypeHabitat.nom}}
+                                </div>
+                            </div>
+                            </div>
+    
+                        </div>
+    
+                        </div>
+                            <h5 class="title-location ">Propriétés</h5>
+
+                            <div class="col mb-5">
+                                <div class="d-flex ml-5">
+                                    {% for propriete in proprietes %}
+                                    {% for proprieteHabitat in proprieteHabitats %}
+                                    <div class="d-grid p-5" style="justify-items: center;">
+                                        {% if propriete.image is empty %}
+                                        <img src="" alt="aucune icone">
+                                        {% else %}
+                                        <img src="{{asset(propriete.image)}}">   
+                                        {% endif %}
+                                        
+                                        <span class="mt-3 mb-3 text-center ml-3" style="font-weight:bolder;">{{propriete.nom}} </span>   
+                                        {% if propriete.obligatoire == true %}
+                                            <span class="text-center">
+                                                <div class="alert-danger mb-2">Obligatoire</div>
+                                            </span>
+                                        {% endif %}
+                                        {% if proprieteHabitat.IdPropriete.id == propriete.id %} 
+                                        <span class="text-center">
+                                            <i>{{proprieteHabitat.valeurPropriete}}</i>
+                                        </span>
+                                        {% else %}
+                                        <span>Aucune valeur</span>
+                                        {% endif %}   
+                                    </div>
+                                    {% endfor %}
+                                    {% endfor %}
+
+                              </div>
+                              <div class="col-12 mt-3">
+                                <div class="col-3" style="margin-left:80%;">
+                                    <button class="btn-atypik-house"><a href="{{path('internaute_propriete_index' , { 'id': habitat.id })}}">Détails</a></button>
+    
+                                </div>
+                            </div>
+                            </div>
+                        <h5 class="title-location ">Description</h5>
+                        <div class="container">
+                            <div class="col-12">
+                                <div class="col">
+                                    <div class="p-3">
+                                        {{habitat.description}}
+                                    </div>
+
+                              </div>
+
+                            </div>
+                        </div>
+                        <h5 class="title-location ">Activite à Proximité</h5>
+                        <div class="container">
+                            <div class="d-flex">
+                                {% for activite in activites %}
+                                {% for activiteHabitat in activiteHabitats %}
+                                <div class="col-3 m-3 border border-dark">
+                                    <img src="{{asset('images/activite/'~ activite.image)}}" width="100%">
+                                    <div class=" d-block p-3 col-12 content text-center">
+                                        <h5 class="text-center mt-3">{{activite.nom}}</h5>
+                                        <span> <b>Adresse :</b> {{activite.adresse}}</span>
+                                        {% if activiteHabitat.typeActivite.id == activite.id %} 
+                                            {% if activiteHabitat.distance is not empty %}
+                                                <p><b>Distance : </b>{{activiteHabitat.distance}} m</p>
+                                            {% else %}
+                                                <p>Aucune Distance</p>
+                                            {% endif %}
+                                        {% endif %}
+                                        <hr>
+                                        <button class="btn-atypik-house"><a href="{{path('internaute_activite_edit' , { 'id': activite.id , 'idHabitat': habitat.id })}}" >Ajouter une Distance</a></button>
+                                    </div>
+                              </div>
+                              {% endfor %}
+                              {% endfor %}
+
+                            </div>
+                        </div>
+                        <h5 class="title-location ">Réservations </h5>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                            <div class="col-12 mt-5 mb-5">
+                                    <ul class="nav justify-content-center" >
+                                        <li class="nav-item justify-content-end mr-5">
+                                            <a class="btn btn-primary " href="{{path('reservation_attente' , {'id' : habitat.id} )}}" tabindex="-1" aria-disabled="true">Gérer les réservations en attente</a>
+                                        </li>
+                                        <li class="nav-item justify-content-end">
+                                            <a class="btn btn-primary " href="{{path('internaute_habitats_calendar' , {'id' : habitat.id} )}}" tabindex="-1" aria-disabled="true">Calendrier de réservation</a>
+                                        </li>
+                                    </ul>
+                              </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        </div>
+
+                
+                            
+                        </div>
+                        
+                        </div>
+
+                </div>
+                <!-- Navigation Tabs-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html.twig' %}
+
+{% endblock %}
+{% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+    $(document).on('ready', function() {
+         $('.js-datepicker').datepicker({
+              format: 'dd-mm-yyyy',
+         });
+     });
+</script>
+
+{% endblock %}

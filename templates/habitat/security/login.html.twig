@@ -1,0 +1,77 @@
+{% extends 'internaute.html.twig' %}
+
+
+
+{% block titre %} Gerer mes Habitats{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/tooplate-style.css') }}" rel="stylesheet" />                                   <!-- Templatemo style -->
+<link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome4.7.0/css/all.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenuPrincipal %}
+
+<div class="tm-page-wrap mx-auto">
+    <section class="tm-banner">
+        <div class="tm-container-outer tm-banner-bg">
+            <div class="container">
+              <form method="post">
+                  {% if error %}
+                      <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                  {% endif %}
+              
+              
+              <!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y" style="min-height:84vh">
+
+    <!-- ============================ COMPONENT LOGIN   ================================= -->
+        <div class="card mx-auto" style="max-width: 380px; margin-top:15%;border :3px solid black ;">
+          <div class="card-body">
+          <h4 class="card-title mb-4">Connexion</h4>
+          <form>
+              <div class="form-group">
+                <label for="inputLogin">Nom d'utilisateur</label>
+                <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" required autofocus>
+            </div> <!-- form-group// -->
+              <div class="form-group">
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" required>
+            </div> <!-- form-group// -->
+              
+              <div class="form-group">
+                <label class="float-left custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input" checked=""> <div class="custom-control-label"> Se Souvenir de Moi </div> </label>
+              </div> <!-- form-group form-check .// -->
+              <div class="form-group">
+                  <button type="submit" class="btn btn-lg btn-starred btn-purple" style="margin-top:10%;margin-left:-17%;"> Se Connecter</button>
+                  <input type="hidden" name="_csrf_token"
+                  value="{{ csrf_token('authenticate') }}"
+              /> <!-- form-group// -->    
+          </form>
+          </div> <!-- card-body.// -->
+        </div> <!-- card .// -->
+    
+         <p class="text-center mt-4"> Pas encore inscrit ? <a href="{{path('inscription')}}">Inscription</a></p>
+         <br><br>
+    <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+    
+    
+    </section>
+  </div>
+
+
+
+          
+{% endblock %}
+
+{% block javascripts %}
+        <script src="{{ asset('js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+          {% include 'userinterface/tabs.html.twig' %}
+
+            <div class="col mt-3 mb-3 p-5" style="background-color: white;">
+                      {% include 'userinterface/profilehead.html.twig' %}
+                    <div class="col-12">
+                        <hr>
+                    </div>
+
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('home')}}">Accueil</a></li>
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute')}}">Mon Profil</a></li>
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute_domaine')}}">Mon Domaine</a></li>
+                        </ol>
+                    </nav>
+
+
+
+                        <div class="col-12 mt-3">
+                            <div class="col-3 mt-5" style="margin-left:80%;">
+                                <button class="btn-atypik-house"><a href="{{path('domaine_activite_edit' , { 'id': activite.id })}}">Modifier l'Activité</a></button>
+
+                            </div>
+                        </div>
+                        <div class="row border border-dark mt-5">
+                        <div class="col-4 mb-3 carte">
+                            <div class=" d-block p-3 col-12 content">
+                                <img src="{{asset('images/activite/'~ activite.image)}}" width="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 ml-3 mb-2 p-4">
+                            <h4 class="text-center">{{activite.nom}}</h4>
+                            <hr>
+                            <div class="row">
+                            <div class="d-flex col-12">
+                            <div class="bloc-info mb-3 ml-3 col-6"> 
+                                <div class="round-icon">
+                                    <span class="icon-info">
+                                        <img src="{{asset('images/icons/bed.png')}}" width="100%">
+
+                                    </span>
+                                </div> 
+                                <div class="details">
+                                    <div class="title">Adresse : </div>
+                                    {{activite.adresse}} 
+                                </div>
+                            </div>
+                            <div class="bloc-info mb-3 ml-3c col-6"> 
+                                <div class="round-icon">
+                                    <span class="icon-info">
+                                        <img src="{{asset('images/icons/family.png')}}" width="100%">
+
+                                    </span>
+                                </div> 
+                                <div class="details">
+                                    <div class="title">Prix : </div>
+                                    {{activite.prix}} €
+                                </div>
+                            </div>
+                            </div> 
+                            </div>
+                        </div>
+                        <h5 class="title-location ">Description</h5>
+                        <div class="container">
+                            <div class="col-12">
+                                <div class="col">
+                                    <div class="p-3">
+                                        {{activite.description}}
+                                    </div>
+
+                              </div>
+
+                            </div>
+                        </div>
+
+                        </div>
+
+
+                        <div class="col-12 p-5">
+
+
+    
+                                </div>
+                
+                            
+                        </div>
+                        
+                        </div>
+
+                </div>
+                <!-- Navigation Tabs-->
+
+            </div>
+        </div>
+    </div>
+{% include 'footer.html.twig' %}
+
+{% endblock %}

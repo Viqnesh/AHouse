@@ -1,0 +1,73 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 600px;" role="document">
+      <div class="modal-content"  >
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel">Profil de {{profil.nom}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+              <div class="col-3">
+                <label for="inputPassword6" class="col-form-label">Photo de profil : </label>
+              </div>
+              <div class="col-12 mb-3">
+                <img src="{{asset('images/profils/'~ profil.url)}}" width="30%">
+              </div>
+                <div class="col-3">
+                  <label for="inputPassword6" class="col-form-label">Nom : </label>
+                </div>
+                <div class="col-9 mb-3">
+                  {{profil.nom}}
+                </div>
+                <div class="col-3">
+                    <label for="inputPassword6" class="col-form-label">Prenom : </label>
+                </div>
+                  <div class="col-9 mb-3">
+                    {{profil.prenom}}
+                  </div>
+                  <div class="col-3">
+                    <label for="inputPassword6" class="col-form-label">Adresse mail  : </label>
+                  </div>
+                  <div class="col-9 mb-3">
+                    {{profil.email}}
+                  </div>
+                  <div class="col-3">
+                    <label for="inputPassword6" class="col-form-label">Sexe: </label>
+                  </div>
+                  <div class="col-9 mb-3">
+                    {{profil.genre}}
+                  </div>
+                  <div class="col-3">
+                      <label for="inputPassword6" class="col-form-label">Adresse : </label>
+                  </div>
+                  <div class="col-9 mb-3">
+                    {{profil.adresse}}
+                  </div>
+                  <div class="col-3">
+                      <label for="inputPassword6" class="col-form-label">Ville : </label>
+                  </div>
+                    <div class="col-9 mb-3">
+                      {{profil.ville}}
+                    </div>
+                    <div class="col-3">
+                      <label for="inputPassword6" class="col-form-label">Telephone : </label>
+                    </div>
+                    <div class="col-9 mb-3">
+                      {{profil.telephone}}
+                    </div>
+                    <div class="col-3">
+                        <label for="inputPassword6" class="col-form-label">Biographie : </label>
+                      </div>
+                      <div class="col-12 mb-3">
+                        {{profil.biographie}}
+                      </div>
+
+            </div>
+          </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+{% block stylesheets %}
+<script src="https://kit.fontawesome.com/2e60cef163.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+{% include 'header.html.twig' %}
+<body>
+<!--  Home Page Image + Search Form -->
+<div class="d-flex faq">
+
+  <div class="col-12">
+      <div class="col-12">
+              <div class="row">
+
+                  <div class="col-md-12 text-center p-5 hero-head-faq">
+                    <h1 class="titleAtypik blanc mt-5">Questions les plus fréquement posées</h1>
+                  <nav class="text-center blanc" aria-label="breadcrumb">
+                      <ol class="breadcrumb justify-content-center">
+                        <a href="{{path('questions')}}" class="breadcrumb-item blanc" aria-current="page">FAQ</a>
+                        <li class="breadcrumb-item blanc" aria-current="page">Gérer mon Domaine</li>
+                      </ol>
+                    </nav>
+                  </div>
+              </div>
+              <div class="container-fluid">
+                <div class="row mt-5">
+                  <div class="col-3">
+                    <div class="sidebar">
+                      <h5 class="faq-title text-center mb-5">Catégories</h5>
+                      <ul>
+                        <li class="font-weight-bold">
+                            <a href="{{path('searchfaq')}}">Recherche d'un habitat</a>
+                        </li>
+                        <li>
+                          <a href="{{path('bookingfaq')}}">Réservation d'un habitat</a>
+                        </li>
+                        <li>
+                          <a href="{{path('calendarfaq')}}">Disponibilité d'un hébérgement</a>
+                        </li>
+                        <li>
+                          <a href="{{path('validerfaq')}}">Validation d'une reservation</a>
+                        </li>
+                        <li>
+                          <p class="gras">Gérer mon Domaine</p>
+                        </li>
+                        <li>
+                          <a href="{{path('paymentfaq')}}">Infos Paiement</a>
+                        </li>
+
+                      </ul>
+                  </div>
+                </div>
+                <div class="col-9">
+                  <div class="">
+                      <h4 class="text-center">Gérer mon Domaine</h4>
+                      <div class="main-content mt-5">
+                        <p class="gras"> Modifier mon Domaine</p>
+                        <p>Vous pouvez mettre à jour votre annonce à tout moment : informations, prix, disponibilités, etc. Il existe de nombreuses façons d'aider vos voyageurs à se faire une idée plus précise de ce que vous proposez.
+                        Pour modifier votre annonce :
+                        Ordinateur de bureau
+                        Application iOS
+                        Application Android
+                        Appareil mobile via mon navigateur
+                        Rendez-vous dans Menu, sélectionnez Annonces, puis cliquez sur celle que vous souhaitez modifier.
+                        Sous Détails de l'annonce, accédez à la section que vous souhaitez modifier, puis cliquez sur Modifier.
+                        Remarque : les modifications peuvent prendre jusqu'à une heure pour apparaître sur votre annonce publique.
+                        </p>
+
+                        <p>Il est important que vous communiquiez facilement avec vos voyageurs. C'est pourquoi nous proposons plusieurs options pour vous joindre et partager des informations.</p>
+
+                       <p class="gras"> Utilisation d'un alias d'e-mail</p>
+                        <p>Vous pouvez utiliser l'alias d'e-mail fourni par Airbnb pour envoyer un e-mail à un voyageur qui a effectué une réservation avec vous dans les cas suivants :
+
+                        Vous devez envoyer les pièces jointes requises par la législation locale.
+                        Vous devez envoyer les contrats de location en pièce jointe.
+                        Vous devez envoyer les guides d'arrivée en pièce jointe.
+                        Vous utilisez un logiciel connecté à Airbnb qui n'est pas intégré à la messagerie Airbnb.
+                        Cette fonctionnalité n'est pas disponible par défaut, mais vous pouvez y accéder en attestant de l'utiliser correctement dans les paramètres de votre compte. Si vous utilisez cette fonctionnalité, vous pourrez envoyer des e-mails aux voyageurs et en recevoir de leur part, et inclure toutes les pièces jointes nécessaires. Pour accéder à cette fonctionnalité :
+
+                        Rendez-vous dans Outils professionnels pour les hôtes dans vos paramètres de compte.
+                        Vous devrez attester que vous l'utiliserez correctement. Pour ce faire, cochez la case M'autoriser à utiliser un alias d'e-mail pour joindre les voyageurs.
+                        Votre alias d'e-mail sera alors disponible chaque fois que vous ouvrirez un fil de discussion avec les voyageurs. Si vous utilisez un logiciel connecté, vous pourrez utiliser l'alias d'e-mail si votre éditeur de logiciel propose cette fonctionnalité. Veuillez contacter votre éditeur de logiciel pour en savoir plus. L'alias d'e-mail pour un voyageur est disponible lors de la réservation et jusqu'à 30 jours après la date de départ.
+
+                        Notez que vous devez utiliser les e-mails et la messagerie conformément à notre Politique hors plate-forme. Vous ne devez pas vous servir des e-mails ou de la messagerie pour demander des commentaires ou des remarques sur un site web autre qu'Airbnb, demander les coordonnées des voyageurs avant qu'ils réservent un séjour ou utiliser leurs coordonnées de manière abusive. Veuillez tenir compte de cette politique, en particulier si vous prévoyez de remplir notre formulaire d'attestation pour continuer à utiliser la fonctionnalité d'alias d'e-mail.
+
+                        Avez-vous reçu l'aide dont vous aviez besoin ?</p>
+                      </div>
+                  </div>
+              </div>
+
+      </div>
+  </div>
+  
+
+  </div>
+
+
+
+  </div>
+</div>
+
+</section>
+</body>
+
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+{% endblock %}

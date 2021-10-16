@@ -1,0 +1,318 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+<div class=" text-center rent-banner p-5" style="background-image:url({{asset('images/habitat/'~ habitats.url)}});filter:brightness(0.5);">
+<h1 class="hero-title">{{habitats.nom}}</h1>
+                    <nav class="text-center" aria-label="breadcrumb ">
+                        <ol class="breadcrumb justify-content-center text-white" >
+                          <li class="breadcrumb-item active" aria-current="page">Les Domaines</li>
+                          <li class="breadcrumb-item active" aria-current="page">{{habitats.idDomaine.nom}}</li>
+                          <li class="breadcrumb-item active" aria-current="page">{{habitats.nom}}</li>
+                        </ol>
+                      </nav>
+</div>
+<div class="d-flex rent-content">
+
+    <div class="col-12 domaine-texture">
+        <div class="col-12 p-5">
+            <div class="container">
+                <div class="row ">
+{% set dateAvailable = [] %}
+    {% for dates in datesHabitats %}
+      {% set dateAvailable = dateAvailable|merge([ dates.dateDispo|date('Y-m-d')]) %}
+    {% endfor %}
+
+{% set dateOO = [] %}
+    {% for datesO in dateOccupes %}
+      {% set dateOO = dateOO|merge([ datesO.dateDispo|date('Y-m-d')]) %}
+    {% endfor %}
+<div class="js-user-rating" data-is-authenticated="{{dateAvailable|json_encode|e('html_attr')}}">
+    <!-- ... -->
+    </div>
+
+<div class="js-date-occupe" data-is-authenticated="{{dateOO|json_encode|e('html_attr')}}">
+    <!-- ... -->
+    </div>
+                    <div class="col-md-12">
+                    <div class="row" style="align-items:center;"> 
+                      <div class="col-12 p-3 ">
+                    <h1 class="text-center handwrite text-white">Infos Habitat</h1>
+                            <div class="row">
+                            <div class="col-8">
+                            <p class="text-justify text-white mt-3">{{habitats.description}}</p>
+                        <div class="d-inline-flex">
+                        <div class="bloc-service">
+                            <div class="icon">
+                                <span class="icon-price">
+                                    <img src="{{asset('images/icons/tag.png')}}" width="100%">
+                                </span>
+                            </div>
+                            <div class="detail-icon">
+                                <div class="title-icon">
+                                    150 €
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="bloc-service">
+                            <div class="icon">
+                                <span class="icon-price">
+                                    <img src="{{asset('images/icons/family.png')}}" width="100%">
+
+                                </span>
+                            </div>
+                            <div class="detail-icon">
+                                <div class="title-icon">
+                                    4 personnes
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="bloc-service">
+                            <div class="icon">
+                                <span class="icon-price">
+                                    <img src="{{asset('images/icons/bed.png')}}" width="100%">
+                                </span>
+                            </div>
+                            <div class="detail-icon">
+                                <div class="title-icon">
+                                    2 Lits
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="bloc-service">
+                            <div class="icon">
+                                <span class="icon-price">
+                                    <img src="{{asset('images/icons/camping.png')}}" width="100%">
+                                </span>
+                            </div>
+                            <div class="detail-icon">
+                                <div class="title-icon">
+                                    Cabane
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                      <div class="col-12 m-1 p-3 ">
+
+                      </div>
+    
+                    <div class="col-12 m-1 p-4">
+                        <h4 class="text-white">Photos</h4>
+                            <div class="col-6  d-flex p-3">
+            <div class="container">
+                <div class="row g-1">
+                    {% if photos is empty %}
+                    <p>Cet habitat ne possède aucune photo.</p>
+                  {% else %}
+                {% for photo in photos %}
+                  <div class="col-12">
+                      <div class="p-1 border bg-light"><img src="{{asset('images/prisedevues/'~ photo.url)}}" width="100%"></div>
+                  </div>
+                {% endfor %}
+                {% endif %}
+
+                </div>
+              </div>
+                            </div>                         
+                    </div>  
+
+    <div class="col-12 p-4 m-1">
+            <div class="row">
+                <h4 class="text-white">l'Avis de nos clients</h4>
+
+            <div class="container">
+                <div class="row p-3 m-1 g-2">
+                  <div class="col-7 commentaire p-3">
+                    {% if comments is empty %} 
+                    <p>Aucun commentaire à été publié pour cette activité</p>
+                    {% else %}
+                    <div class="p-3 m-1">
+                        {% for comment in comments %}
+                        <div class="col-12 text-center mb-4">
+                            <span class="appr">{{comment.titre}}</span>
+                        </div>
+                        <p class="comment">
+                            {{comment.contenu}}
+                        </p>
+                        <p class="user-comment">{{comment.idUser.nom}} {{comment.idUser.prenom}}</p>
+
+                    </div>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+              
+        </div>
+
+    </div>
+    <div class="col-12 p-4 m-1">
+        <h4 class="text-white">Autour Du Domaine</h4>
+                    <div class="d-flex p-3 m-1 card-etab card-bg">
+                {% for activite in activites %}
+            <div class="col-4 m-3 carte shadow">
+                <img src="{{asset('images/activite/'~ activite.image)}}" width="100%" height="200px">
+                <div class="bandeau">
+                    
+                    
+                </div>
+                <div class=" d-block  p-3 col-12 bg-info content">
+                <a href="{{path('habitat_activite' , { 'id': activite.id })}}" >
+                <h5 class="text-center text-white m-2 handwrite">{{activite.nom}}</h5>
+                </a>
+
+                </div>
+
+            </div>
+            {% endfor %}
+
+            </div>
+     
+    </div>
+                            </div>
+                            <div class="p-4 shadow block-texture calendrier-d col-4"> 
+                                <h4>Réservations</h4>
+                          {{ form_start(rent) }}
+                          <div class="container justify-content-center mt-3" style="text-align: -webkit-center;">
+                                <div class="row">
+                                  <div class="col-12 justify-content-center">
+                                    <div class="col-6 mb-4">
+                                        {{ form_widget(rent.dateDebut) }}
+                                        {{ form_errors(rent.dateDebut) }}
+                                    </div>
+                                  </div>
+                                  <div class="col-12 justify-content-center">
+                                    <div class="col-6 mb-4">
+                                        {{ form_widget(rent.dateFin) }}
+                                        {{ form_errors(rent.dateFin) }}
+                                    </div>
+                                  </div>
+                                  <div class="col-12 justify-content-center">
+                                    <div class="col-6 mb-4">
+                                        {{ form_widget(rent.nbpersonnes) }}
+                                        {{ form_errors(rent.nbpersonnes) }}
+                                    </div>
+                                  </div>
+                                  <div class="col-12 justify-content-center">
+                                    <div class="col-6 mt-4">
+                                        {{ form_widget(rent.reserver, { 'attr': {'class': 'button-search-region btn-vert'}} ) }}
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                            {{ form_end(rent) }}
+
+                            <div class="mt-2">
+                            </div>               
+                            </div>
+                            </div>
+
+                            </div>
+
+
+
+                    </div>
+
+                    </div>
+                      </div>
+
+                
+                    </div>
+        
+                            
+                    </div>
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-12">
+            <h1 class="text-center handwrite mt-5 mb-5">Le Domaine</h1>
+            <div class="card-bg">
+            <div class="col-7 mb-5  mx-auto carte shadow">
+                <img src="{{asset('images/domaines/'~ domaines.image)}}" width="100%" height="500px">
+
+                <div class=" d-block  text-white text-center bg-dark p-3 col-12 ">
+                    <h3 class="text-center ">{{domaines.nom}}</h3>
+                    <p>{{domaines.description}}</p>
+                    <div class"text-center">
+                    <a class="btn shadow-sm btn-lg btn-primary text-center button-search-region btn-vert" style="width:50%;" href="{{path('domaine_details' , { 'id': domaines.id })}}">Visiter le Domaine</a>
+                    </div>
+                </div>
+
+            </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% include 'footer.html.twig' %}
+
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDr14B1ifiONym_r-iaU3f3z0QzD-zBwk"></script>
+<script src="{{ asset('js/map.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>                       
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>                     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
+
+
+<script>
+(function($){
+$.fn.datepicker.dates['fr'] = {
+days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+daysMin: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+monthsShort: ["janv.", "févr.", "mars", "avril", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+today: "Aujourd'hui",
+monthsTitle: "Mois",
+clear: "Effacer",
+weekStart: 1,
+format: "dd/mm/yyyy"
+};
+}(jQuery));
+let datesEnabled = $('.js-user-rating').data('isAuthenticated') ;
+let datesOccupes = $('.js-date-occupe').data('isAuthenticated') ;
+$('.js-datepicker').datepicker({
+language: 'fr',
+autoclose: true,
+todayHighlight: false,
+beforeShowDay: function(date) {
+      var allDates = date.getFullYear() + "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2);
+      if (datesEnabled.indexOf(allDates) != -1) {
+        return {
+          classes: 'date-possible',
+          tooltip: 'Vous pouvez choisir cette date'
+        }
+      } else {
+        return false;
+      }
+    }
+});
+console.log(datesOccupes);
+$('.js-datepicker').datepicker("setDate", datesOccupes);
+
+
+</script>
+{% endblock %}

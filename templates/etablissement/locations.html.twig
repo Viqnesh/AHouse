@@ -1,0 +1,227 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+<div class=" text-center rent-banner p-5" style="background-image:url({{asset('images/domaines/'~ domaine.image)}});filter:brightness(0.5);">
+<h1 class="hero-title">{{domaine.nom}}</h1>
+                    <nav class="text-center" aria-label="breadcrumb ">
+                        <ol class="breadcrumb justify-content-center text-white" >
+                          <li class="breadcrumb-item  text-white active" aria-current="page">Accueil</li>
+                          <li class="breadcrumb-item text-white  active" aria-current="page">Les Domaines</li>
+                          <li class="breadcrumb-item text-white active" aria-current="page">{{domaine.nom}}</li>
+                        </ol>
+                      </nav>
+</div>
+<div class="d-flex rent-content">
+
+    <div class="col-12 domaine-texture">
+        <div class="col-12 p-5">
+            <div class="container">
+                <div class="row ">
+
+                    <div class="col-md-12">
+                    <div class="row" style="align-items:center;"> 
+                      <div class="col-12 p-3 ">
+                    <h1 class="text-center handwrite text-white">Infos sur le Domaine</h1>
+                            <div class="row">
+                            <div class="col-8">
+                            <p class="text-justify text-white mt-3">{{domaine.description}}}</p>
+                      <div class="col-12 m-1 p-3 ">
+                        <h4 class="text-white"> Propriétaire</h4>
+                            <div class="col-12 d-flex p-3">
+                                <img src="{{asset('images/domaines/'~ domaine.image)}}" width="125px" height="125px" style="border-radius:50%;">
+                                <div class="d-block" style="margin-left:5%">
+                                <h3 class="text-white">Nom du Propriétaire</h3>
+                                <button class="btn shadow-sm btn-lg btn-primary text-center button-search-region btn-vert" style="width:100%;" data-toggle="modal" data-target="#exampleModal">Contactez le Propriétaire</button>
+                                </div>
+                            </div>
+<!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 600px;" role="document">
+      <div class="modal-content"  >
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel">Contactez le Propriétaire</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            {{ form_start(contact) }}
+            <div class="row">
+                <div class="col-3">
+                  <label for="inputPassword6" class="col-form-label">Votre e-mail : </label>
+                </div>
+                <div class="col-9 mb-3">
+                    {{ form_widget(contact.email) }}
+                </div>
+                <div class="col-3">
+                    <label for="inputPassword6" class="col-form-label">Objet : </label>
+                  </div>
+                  <div class="col-9 mb-3">
+                      {{ form_widget(contact.objet) }}
+                  </div>
+                  <div class="col-3">
+                    <label for="inputPassword6" class="col-form-label">Contenu : </label>
+                  </div>
+                  <div class="col-12 mb-3">
+                      {{ form_widget(contact.contenu, { 'attr': {'class': 'commentBox'} }) }}
+                  </div>
+            </div>
+            {{ form_end(contact) }}      
+          </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+                      </div>
+
+                    <div class="col-12 m-1 p-4">
+                        <h4 class="text-white">Equipements</h4>
+                            <div class="col-6  d-flex p-3">
+                                {% for equipement in domaine.equipement %}
+                                    <div>
+                                        <div class="p-3 m-3 text-white">
+                                            <!--<img src="{{asset(equipement.icon)}}" width="24px"> -->
+                                            {{equipement.nom}}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>                         
+                    </div>  
+                    <div class="col-12 m-1 p-4">
+                        <h4 class="text-white">
+                            Localisation
+                        </h4>
+                        <div class="col">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1975.465967424819!2d2.4260131884908267!3d48.63030947751983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5de18f93df185%3A0xf622440f20b21e7!2s202%20Rue%20Desaix%2C%2091000%20%C3%89vry-Courcouronnes!5e0!3m2!1sen!2sfr!4v1619687233141!5m2!1sen!2sfr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <div class="bandeau">
+                            <p class="p-3"> <i class="bi bi-geo-alt-fill"></i> {{domaine.pays}} , {{domaine.ville}}</p>  
+                        </div> 
+                        </div>
+                    
+                    </div>
+                            </div>
+                            <div class="p-4 shadow block-texture calendrier-d col-4"> 
+                                <h4>Horaires d'Ouvertures</h4>
+
+                                <div class="bloc-info ">
+
+                                    <i class="bi bi-calendar3 fa-3x p-3 "></i>
+                                    <div class="details  ">
+                                    <div class="title">Heure d'arrivée : </div>
+                                    {{domaine.arrive|date('H:m')}}
+                                    </div>
+                                    </div>
+                                    <div class="bloc-info">
+
+                                <i class="bi bi-calendar3  p-3 fa-3x"></i>
+                                <div class="details">
+                                    <div class="title ">Heure de depart : </div>
+                                    {{domaine.depart|date('H:m')}}
+                                </div>
+                            </div>
+                            <div class="mt-2 datepicker-domaine">
+                            </div>               
+                            </div>
+                            </div>
+
+                            </div>
+
+
+
+                    </div>
+
+                    </div>
+                      </div>
+
+                
+                    </div>
+        
+                            
+                    </div>
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-12">
+            <h1 class="text-center handwrite mt-5 mb-5">Les Logements</h1>
+            <div class="card-etab card-bg">
+                {% for habitat in habitats %}
+            <div class="col-3 mb-3 carte shadow">
+                <img src="{{asset('images/habitat/'~ habitat.url)}}" width="100%">
+                <div class="bandeau">
+                    
+                    <p class="p-3">A partir de {{habitat.prix}} € / nuit</p>
+                    
+                </div>
+                <div class=" d-block  p-3 col-12 content">
+                    <h2 class="title">{{habitat.nom}}</h2>
+                    <h2>{{habitat.idTypeHabitat.nom}}</h2>
+                    <span class="lieu">  {{habitat.ville}} ({{habitat.pays}})</span>
+                    <div class" p-5 m-5 text-center">
+                    <a class="btn shadow-sm btn-lg btn-primary text-center button-search-region btn-vert" style="width:100%;" href="">Visiter l'Habitat</a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% include 'footer.html.twig' %}
+
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDr14B1ifiONym_r-iaU3f3z0QzD-zBwk"></script>
+<script src="{{ asset('js/map.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>                       
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>                     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
+<script>
+    getAddress( {{domaine.adresse}} {{domaine.ville}} );
+</script>
+
+<script>
+(function($){
+$.fn.datepicker.dates['fr'] = {
+days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+daysMin: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+monthsShort: ["janv.", "févr.", "mars", "avril", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+today: "Aujourd'hui",
+monthsTitle: "Mois",
+clear: "Effacer",
+weekStart: 1,
+format: "dd/mm/yyyy"
+};
+}(jQuery));
+$('.datepicker-domaine').datepicker({
+language: 'fr',
+autoclose: true,
+todayHighlight: false,
+
+});
+
+
+</script>
+{% endblock %}

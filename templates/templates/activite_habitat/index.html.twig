@@ -1,0 +1,63 @@
+{% extends 'internaute.html.twig' %}
+{% block titre %} Gerer mes Habitats{% endblock %}
+
+{% block stylesheets %}
+
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/tooplate-style.css') }}" rel="stylesheet" />                                   <!-- Templatemo style -->
+<link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome4.7.0/css/all.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenuPrincipal %}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+{% include 'headerFinal.html.twig' %}
+    <h1>ActiviteHabitat index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Adresse</th>
+                <th>Distance</th>
+                <th>Prix</th>
+                <th>Url</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activite_habitat in activite_habitats %}
+            <tr>
+                <td>{{ activite_habitat.id }}</td>
+                <td>{{ activite_habitat.adresse }}</td>
+                <td>{{ activite_habitat.distance }}</td>
+                <td>{{ activite_habitat.prix }}</td>
+                <td>{{ activite_habitat.url }}</td>
+                <td>
+                    <a href="{{ path('activite_habitat_show', {'idActiviteH': activite_habitat.id}) }}">show</a>
+                    <a href="{{ path('activite_habitat_edit', {'idActiviteH': activite_habitat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('activite_habitat_new', {'id': habitat.id}) }}">Create new</a>
+{% endblock %}

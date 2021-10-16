@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+          {% include 'userinterface/tabs.html.twig' %}
+
+            <div class="col mt-3 mb-3 p-5" style="background-color: white;">
+                      {% include 'userinterface/profilehead.html.twig' %}
+                <div class="container">
+                    <div class="col-12">
+
+                        <hr>
+                    </div>
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="text-dark" href="{{path('home')}}">Accueil</a></li>
+                            <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute')}}">Mon Profil</a></li>
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute_location')}}">Historique des Locations</a></li>
+                        </ol>
+                    </nav>
+                        <div class="text-center col-12 p-5">
+                            <h4>Historique de mes Réservations</h4>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                    
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Habitat</th>
+                                            <th>Date Réservation</th>
+                                            <th>Date Début</th>
+                                            <th>Date Fin</th>
+                                            <th>Nombre de Personne</th>
+                                            <th>Total</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for location in locations %}
+                                        <tr>
+                                            <td>
+                                                {{location.idHabitatIdLocation.nom}}
+                                            </td>
+                                            <td>
+                                                {{location.dateReservation|date('Y-m-d')}}
+                                            </td>
+                                            <td>
+                                                {{location.dateDebut|date('Y-m-d')}}
+                                            </td>
+                                            <td>
+                                                {{location.dateFin|date('Y-m-d')}}
+                                            </td>
+                                            <td>
+                                                {{location.nbPersonnes}}
+                                            </td>
+                                            <td>
+                                                {{location.idHabitatIdLocation.prix}} €
+                                            </td>
+                                            <td>
+                                                <a class="text-dark" href="{{path('listeHistorique_details' , {'id':location.idHabitatIdLocation.id})}}">Voir la location</a>
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="6">Aucune Réservations pour le moment</td>
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                </div>
+                <!-- Navigation Tabs-->
+
+            </div>
+        </div>
+    </div>
+{% include 'footer.html.twig' %}
+
+{% endblock %}

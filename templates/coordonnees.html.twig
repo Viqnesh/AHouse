@@ -1,0 +1,226 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+
+  <div class="container bg-white rounded shadow-sm">
+    <div class="row justify-content-center mt-3 mb-3 p-5">
+      <div class="col-12 justify-content-center mb-5">
+
+      
+          <h1 class="h3 booking-tab-title mb-5 font-weight-normal text-center">Reservation</h1>
+          <div class="container">
+            <div class="row mb-3 text-center">
+              <div class="col-sm fs-3 steps">
+                <i class="bi bi-people"></i> Occupants
+              </div>
+              <div class="col-sm fs-3 steps">
+                <i class="bi bi-ui-checks"></i> Coordonnées
+              </div>
+              <div class="col-sm fs-3 steps-av">
+                <i class="bi bi-credit-card"></i> Paiement
+              </div>
+            </div>
+          </div>
+          <div class="progress shadow-sm" style="height: 40px;">
+            <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar progress-bar-striped progress-bar-animated" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            </div>
+  
+          </div>
+      </div>
+
+    <div class="col-7 bg-white border p-5 shadow-sm rounded-left">
+      <h3 class="h3 fs-3 steps booking-tab-title ml-3 text-center"> <i class="bi bi-ui-checks"></i> Coordonnées </h3>
+      <hr>      
+      <div class="p-3">
+        <ul>
+          {{ form_start(form) }}
+        <div class="row ">
+          <div class="col-12 m-2">
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ form_label(form.civilite, null , {'label_attr': {'class': 'form-check-label'}}) }}</label>
+              {{ form_widget(form.civilite) }} {{ form_help(form.civilite) }}
+          </div>
+          <div class="col m-2">
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ form_label(form.nom) }}</label>
+              {{ form_widget(form.nom) }}
+              <small>{{ form_errors(form.nom) }}</small>
+          </div>
+          <div class="col m-2 ">
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ form_label(form.prenom) }}</label>
+              {{ form_widget(form.prenom) }}
+              <small>{{ form_errors(form.prenom) }}</small>          
+          </div>
+          <div class="w-100"></div>
+          <div class="col m-2 ">
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ form_label(form.email) }}</label>
+              {{ form_widget(form.email) }}
+              <small>{{ form_errors(form.email) }}</small> 
+          </div>      
+          <div class="col m-2 ">
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ form_label(form.telephone) }}</label>
+              {{ form_widget(form.telephone) }}
+              <small>{{ form_errors(form.telephone) }}</small>
+          </div>
+          <div class="col-12 m-2 ">
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ form_label(form.adresse) }}</label>
+              {{ form_widget(form.adresse) }}
+              <small>{{ form_errors(form.adresse) }}</small>
+          </div>
+          <div class="col m-2 ">
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ form_label(form.cp, 'Code Postal', {'label_attr': {'class': 'post-code'}})}}</label>
+              {{ form_widget(form.cp, { 'id': 'postcode' }) }}
+              <small>{{ form_errors(form.cp) }}</small>
+          </div>
+          <div class="col m-2 ">
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ form_label(form.ville ) }}</label>
+              {{ form_widget(form.ville, { 'id': 'ville' }) }}
+              <small><i class="fas fa-info-circle"></i> {{ form_help(form.ville) }}</small>
+              <small>{{ form_errors(form.ville) }}</small>
+
+          </div>
+          <div class="col-12 m-2 ">
+            <label for="staticEmail" class="col-sm-2 col-form-label">{{ form_label(form.pays) }}</label>
+              {{ form_widget(form.pays) }}
+              <small>{{ form_errors(form.pays) }}</small>
+          </div>
+          <div class="col-12 d-inline-flex m-1 mt-5 justify-content-between">
+            <input type="button" value= "Précedent" id="btnFetch" class="btn prev-button stripe-button mr-5" onclick="history.back()">
+
+            {{ form_row(form.save,{ 'label': 'Suivant' }) }}
+
+          </div>
+          {{ form_end(form) }}
+
+        </ul>
+      </div>
+
+
+
+    </div>
+    <div class="col-4 bg-info border p-4 infos-recap">
+    <h5 class="mb-3">Récapitulatif</h5>
+    <table class="table mt-4" style="color:white;">
+      <thead>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Date d'arrivée</td>
+          <td>{{ app.session.get('depart')|date("F jS") }}</td>
+        </tr>
+        <tr>
+          <td>Date de départ</td>
+          <td>{{ app.session.get('arrivee')|date("F jS") }}</td>
+        </tr>
+        <tr>
+          <td>Nombre d'occupants</td>
+          <td>{{ app.session.get('nbOccupants') }}</td>
+        </tr>
+        <tr>
+          <td>Nombre de nuits</td>
+          <td></td>
+        </tr>
+          <tr>
+          <th>Total</th>
+          <th class="js-prix-ttc">{{ app.session.get('prixTTC') }} €</th>
+        </tr>
+      </tbody>
+    </table>
+     <h5 class="mb-3">Habitat Choisi</h5>
+      <table class="table mt-4" style="color:white;">
+      <thead>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nom de l'habitat</td>
+          <td>{{habitats.nom}}</td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td>{{habitats.idTypeHabitat.nom}}</td>
+        </tr>
+        <tr>
+          <td>Prix / Nuit</td>
+          <td>{{habitats.prix}} € </td>
+        </tr>
+      </tbody>
+    </table>
+      <img class="mt-5" src="{{asset('images/habitat/'~ habitats.url)}}" width="100%">
+
+    </div>
+  </div>
+</div>
+{% include 'footer.html.twig' %}
+
+{% endblock %}
+
+
+{% block javascripts %}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+<script>
+$(document).ready( function() {
+    $(".progress-bar").animate({
+        width: "68%"
+    }, 900);
+    $("#btnFetch").click(function() {
+      // disable button
+      $(this).prop("disabled", true);
+      // add spinner to button
+      $(this).html(
+        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
+      );
+    });
+    var json = (function () {
+        var json = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': "{{ asset('js/data.json') }}",
+            'dataType': "json",
+            'success': function (data) {
+                json = data;
+            }
+        });
+        return json;
+    })(); 
+    autoComplete = [];
+
+    for (var i = 0, len = json.length; i < len; i++) {
+
+        autoComplete.push("" + json[i]["cp"] + " " + json[i]["ville"]);
+    }
+    console.log(autoComplete);
+    ( function( $ ) {
+
+        $( "#postcode" ).autocomplete({
+          source: autoComplete,
+          maxHeight: 200, //you could easily change this maxHeight value
+          minLength: 4,
+          select: function (event, ui) {
+            ville = ui.item.label.replace(/[0-9]/g, '');
+            cp = ui.item.value.replace(/\D/g,'');
+            $( "#postcode" ).val(cp);
+            $('#ville').val(ville);
+            jQuery('body').trigger('update_checkout');
+            return false;
+          }
+        // On remplit aussi la ville
+
+        });
+
+        $( "#postcode" ).on( "autocompleteselect", function( event, ui ) {
+            jQuery('body').trigger('update_checkout');
+            return false;
+        } );
+    } )( jQuery );
+
+});
+
+</script>  
+  {% endblock %}

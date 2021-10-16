@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+{% block stylesheets %}
+<script src="https://kit.fontawesome.com/2e60cef163.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+{% include 'header.html.twig' %}
+<body>
+<!--  Home Page Image + Search Form -->
+<div class="d-flex faq">
+
+  <div class="col-12">
+      <div class="col-12">
+              <div class="row">
+
+                  <div class="col-md-12 text-center p-5 hero-head-faq">
+                    <h1 class="titleAtypik blanc mt-5">Questions les plus fréquement posées</h1>
+                  <nav class="text-center blanc" aria-label="breadcrumb">
+                      <ol class="breadcrumb justify-content-center">
+                        <a href="{{path('questions')}}" class="breadcrumb-item blanc" aria-current="page">FAQ</a>
+                        <li class="breadcrumb-item blanc" aria-current="page">Rechercher un Habitat</li>
+                      </ol>
+                    </nav>
+                  </div>
+              </div>
+              <div class="container-fluid">
+                <div class="row mt-5">
+                  <div class="col-3">
+                    <div class="sidebar">
+                      <h5 class="faq-title text-center mb-5">Catégories</h5>
+                      <ul>
+                        <li class="font-weight-bold">
+                            <p class="gras">Recherche d'un habitat</p>
+                        </li>
+                        <li>
+                          <a href="{{path('bookingfaq')}}">Réservation d'un habitat</a>
+                        </li>
+                        <li>
+                          <a href="{{path('calendarfaq')}}">Disponibilité d'un hébérgement</a>
+                        </li>
+                        <li>
+                          <a href="{{path('validerfaq')}}">Validation d'une reservation</a>
+                        </li>
+                        <li>
+                          <a href="{{path('gererfaq')}}">Gérer mon Domaine</a>
+                        </li>
+                        <li>
+                          <a href="{{path('paymentfaq')}}">Infos Paiement</a>
+                        </li>
+
+                      </ul>
+                  </div>
+                </div>
+                <div class="col-9">
+                  <div class="">
+                      <h4 class="text-center">Rechercher un Habitat</h4>
+                      <div class="mt-5 main-content">
+                        <p class="gras">Etape 1 : Sélectionnez vos critères 
+                        Vous avez la possibilité de sélectionner un ou plusieurs critères de recherche :
+                        </p>
+                        <ul>
+                        <li>la destination : champ libre !</li>
+                        Il s'agit de déterminer la zone géographique dans laquelle vous souhaitez séjourner (région, département, commune de plus de 5000 habitants, point d’intérêt touristique…). Vous n'avez pas d'idée de destination ? Vous avez la possibilité d'être géolocalisé (option à activer depuis votre navigateur) pour trouver un hébergement à moins de 2h de chez vous.
+                        Par exemple :
+                        Bretagne, Gironde...
+                        ou bien
+                        Lyon, Futuroscope : dans ce cas, la recherche est étendue à 2h aux alentours
+
+                        <li>les dates de votre séjour (si vous avez une date fixe)<li>
+                        Attention, les samedis sont très prisés, n'hésitez pas à regarder pour d'autres jours de la semaine si vous le pouvez !
+
+                        <li>le nombre de personnes (occupants hébergés dans un même logement)</li>
+
+                        <li>le type d’hébergement insolite (cabanes, yourtes, bulles, igloo…)
+                        Laissez-vous tenter par des hébergements similaires à votre idée de départ ! Vous vouliez une bulle, pourquoi ne pas tester un dôme ?</li>
+
+
+                        Cliquez sur “rechercher”, les résultats correspondants apparaîtront.
+                        </ul>
+                        <p class="gras">Etape 2 : Filtrez votre recherche (facultatif)
+                        </p>
+                        <p>Vous avez une idée très précise de votre recherche ? Sélectionnez "Plus de filtres" !
+                        Mais aussi d'autres critères comme l'accès, la disponibilité des bons cadeaux, etc...
+                        Vous pourrez déterminer si vous souhaitez par exemple disposer de l'eau courante, de l'électricité, de sanitaires privatifs etc...
+                        </p>
+                        <p class="gras">Etape 3 : Choisissez une offre
+                        </p>
+                        <p>Pour découvrir les offres, cliquez sur la vignette de l’hébergement de votre choix, 
+                        vous retrouverez toutes les informations pratiques relatives à l’hébergement et à votre 
+                        séjour : type d’hébergement, caractéristiques, tarif, équipements, services etc...</p>
+                        <p class="gras">Etape 4 : Réservez en ligne</p>
+                        <p>Il suffit de cliquer sur le bouton "Réserver"
+                        Vous n'y parvenez pas, cliquez sur ce lien ! Comment effectuer une réservation ?
+                        </p>
+                      </div>
+                  </div>
+              </div>
+
+      </div>
+  </div>
+  
+
+  </div>
+
+
+
+  </div>
+</div>
+
+</section>
+</body>
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+{% endblock %}

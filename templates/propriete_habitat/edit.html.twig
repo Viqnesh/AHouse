@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'headerFinal.html.twig' %}
+
+<div class="corps d-flex" style="background-color: background-color : #F9F9F9;">
+    <div class="container">
+        <div class="row">
+                {% include 'userinterface/profilehead.html.twig' %}
+            <div class="d-flex col-12 mt-3 mb-5 p-5" style="background-color: white;">
+                <div class="container">
+                    <div class="col-12">
+                        {% include 'userinterface/tabs.html.twig' %}
+
+                        <hr>
+                    </div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('home')}}">Accueil</a></li>
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute')}}">Mon Profil</a></li>
+                        </ol>
+                    </nav>
+                    <div class="col-12 mt-3">
+                        <div class="col-3" style="margin-left:80%;">
+
+                        </div>
+                    </div>
+                        <div class="text-center col-12 p-5">
+                            <h3>Entrer une valeur</h3>
+                        </div>
+                        <div class="row">
+                        <div class="d-inline-flex col-12 font-weight-bold border-bottom border-dark text-center justify-content-center align-items-center">
+                            <div class="col-2">
+                                    <div class="bloc-content m-3">
+                                        <p>Icône</p>
+                                    </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="bloc-content m-3">
+                                    <p>Nom</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="bloc-content m-3">
+                                <p>Type</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="bloc-content m-3">
+                                <p>Valeur</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="d-inline-flex col-12 justify-content-center text-center align-items-center">
+                            <div class="col-2">
+
+                                <div class="bloc-service mr-auto justify-content-center">
+                                        <span class="icon-price">
+                                            <img src="{{asset(propriete.image)}}">
+
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="bloc-content m-3">
+                                    <p>{{ propriete.nom }}</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="bloc-content m-3">
+                                <p>{{ propriete.type }}</p>
+                                </div>
+                            </div>
+                            {{ form_start(form) }}
+                            {{ form_errors(form) }}
+
+                            <div class="col-12">
+                                {{ form_widget(form.valeurPropriete) }}
+                            </div>
+
+                        </div>
+
+
+
+
+                        </div>
+                        <div class="mt-5 text-center">
+                            {{ form_row(form.save, { 'label': 'Valider' }) }}
+                        </div>
+                        {{ form_end(form) }}
+
+                </div>
+                <!-- Navigation Tabs-->
+
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html.twig' %}
+
+{% endblock %}
+
+

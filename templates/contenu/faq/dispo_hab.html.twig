@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+{% block stylesheets %}
+<script src="https://kit.fontawesome.com/2e60cef163.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+{% include 'header.html.twig' %}
+<body>
+<!--  Home Page Image + Search Form -->
+<div class="d-flex faq">
+
+  <div class="col-12">
+      <div class="col-12">
+              <div class="row">
+
+                  <div class="col-md-12 text-center p-5 hero-head-faq">
+                    <h1 class="titleAtypik blanc mt-5">Questions les plus fréquement posées</h1>
+                  <nav class="text-center blanc" aria-label="breadcrumb">
+                      <ol class="breadcrumb justify-content-center">
+                        <a href="{{path('questions')}}" class="breadcrumb-item blanc" aria-current="page">FAQ</a>
+                        <li class="breadcrumb-item blanc" aria-current="page">Disponibilité d'un hébérgement</li>
+                      </ol>
+                    </nav>
+                  </div>
+              </div>
+              <div class="container-fluid">
+                <div class="row mt-5">
+                  <div class="col-3">
+                    <div class="sidebar">
+                      <h5 class="faq-title text-center mb-5">Catégories</h5>
+                      <ul>
+                        <li class="font-weight-bold">
+                            <a href="{{path('searchfaq')}}">Recherche d'un habitat</a>
+                        </li>
+                        <li>
+                          <a href="{{path('bookingfaq')}}">Réservation d'un habitat</a>
+                        </li>
+                        <li>
+                          <p class="gras">Disponibilité d'un hébérgement</p>
+                        </li>
+                        <li>
+                          <a href="{{path('validerfaq')}}">Validation d'une reservation</a>
+                        </li>
+                        <li>
+                          <a href="{{path('gererfaq')}}">Gérer mon Domaine</a>
+                        </li>
+                        <li>
+                          <a href="{{path('paymentfaq')}}">Infos Paiement</a>
+                        </li>
+
+                      </ul>
+                  </div>
+                </div>
+                <div class="col-9">
+                  <div class="">
+                      <h4 class="text-center">Disponibilité d'un hébérgement</h4>
+                      <div class="main-content mt-5">
+                      <p>Pour consulter la disponibilité d'un hébergement, il vous suffit de sélectionner une date dans "date d'arrivée" et "date de départ" depuis la page dédiée à l'hébergement.
+                      Une date affichée en bleu signifie que l'hébergement est disponible, une date grisée signifie que la date est indisponible.
+                      Si vous souhaitez connaître les hébergements disponibles à une date précise, il suffit de vous rendre sur la page d'accueil de notre site et d'utiliser le moteur de recherches.</p>
+                      </div>
+                  </div>
+              </div>
+
+      </div>
+  </div>
+  
+
+  </div>
+
+
+
+  </div>
+</div>
+
+</section>
+</body>
+  {% include 'footer.html.twig' %}
+
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+{% endblock %}

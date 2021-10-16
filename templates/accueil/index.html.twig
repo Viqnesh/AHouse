@@ -1,0 +1,156 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+<body style="background-color : #E3F2EA ;">
+
+
+<!--  Home Page Image + Search Form -->
+{% include 'headerbg.html.twig' %}
+
+ <div class="d-flex justify-content-center search">
+
+    <div class="container">
+        <div class="row justify-content-end mt-5">
+            <div class="col-10 mx-auto searchform ">
+                <div class="container">
+                {{ form_start(form) }}
+                    <div class="col-12 mt-3">
+                        <div class="row text-center mb-5">
+                            <h5>Trouvez votre destination de rêve !</h5>
+                        </div>
+                    <div class="row justify-content-center">
+                    <div class="col-3 mr-5 text-center">
+                        {{ form_widget(form.region, {'attr': {'class': 'region-search'}} , { 'id': 'region' }) }}
+                    </div>
+                    <div class="col-3 mr-5">
+                        {{ form_widget(form.capacite, {'attr': {'class': 'capacite-search '}} , { 'id': 'region' }) }}
+                    </div>
+                    <div class="col-3 mr-5">
+                        {{ form_widget(form.idTypeHabitat, {'attr': {'class': 'habitat-search'}} ,  { 'id': 'region' }) }}
+                    </div>
+                    </div>
+                    <div class="row-3 mt-5 text-center">
+                        <div class=" col-12 ">
+                            {{ form_widget(form.save, { 'label': 'Rechercher ! ' }) }}
+                        </div>
+                    </div>
+                    </div>
+                        {{ form_end(form) }}
+
+                </div>      
+      </div>
+  </div>
+</div>
+
+</div>
+<!--  Section Divider -->
+
+    
+</div>
+<div>
+<!--  Tops & New  -->
+<div class="container mt-5 mb-5">
+<h2 class=" region-home titleAtypik mb-5 text-center handwrite">Nos Régions Favorites</h2>
+<div class="home-hr"></div>
+</div>
+<div class="row justify-content-center m-5">
+    {% for region in regions | slice(0,6)%}
+<div class="card-round-region shadow" style="background-image:url({{region.image}});background-size: cover;
+    background-repeat: no-repeat;">
+<div class="row text-center justify-content-center">
+      <div class="region-desc p-3">
+                <h5 class="mb-4">{{region.nom}}</h5>
+      </div>
+      <div class="block-region">
+        <button class="btn btn-light" type="button">Découvrir les habitats</button>
+      </div>
+</div>
+</div>
+    {% endfor %}
+</div>
+<div class="text-center">
+  <button type="button" class="btn btn-lg button-search-region btn-vert" style="width: 18%;">Voir toutes les régions</button>
+</div>
+<div class="container mt-5 mb-5">
+<h2 class=" region-home titleAtypik mb-5 text-center handwrite">Nos Logements</h2>
+<div class="home-hr"></div>
+</div>
+<div class="row justify-content-center m-5">
+    {% for type in types %}
+<div class="card-round-region shadow" style="background-image:url({{type.image}});background-size: cover;
+    background-repeat: no-repeat;">
+<div class="row text-center justify-content-center">
+      <div class="region-desc p-3">
+                <h5 class="mb-4">{{type.nom}}</h5>
+      </div>
+      <div class="block-region">
+        <button class="btn btn-light" type="button">Découvrir les habitats</button>
+      </div>
+</div>
+</div>
+    {% endfor %}
+<div class="text-center">
+  <button type="button" class="btn btn-lg button-search-region btn-vert" style="width: 20%;">Voir tout les logements</button>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+<!--About Us-->
+
+<div class="jumbotron qsn">
+<div>
+  <h1 class="display-4 text-center text-white handwrite">Atypik House , Qu'est-ce que c'est ?</h1>
+  <p class="lead text-center mt-5 text-white">AtypikHouse se situant dans la localité de Pierrefonds, dans le département de l’Oise et qui cherche à élargir son champ en France et en Europe, est une société évoluant dans la location d’habitat alternatifs.
+Créée en 2018, cette société est composée de 3 associés partageant les mêmes passions pour les voyages, l‘habitat alternatif et la vie en harmonie avec la nature.
+AtypikHouse, c’est une société de location d’habitat alternatifs, elle a vu le jour dans un contexte où le monde imaginaire et la beauté de la nature ne sèchent de séduire un grand nombre de public, avec des maisons de belles architectures, des cabanes en plein milieu de forêt. Ce qui pousse beaucoup de monde à sortir de leur zone de confort habituel pour poursuivre une aventure dans ces maisons d’insolite et changer d’air durant les vacances afin de profiter et vivre une expérience épanouissante et inoubliable.
+Cette envie ressenti par un grand nombre de personnes de vivre des jours meilleurs dans le monde de l’habitat insolite, a suscité l’idée de création d’entreprise chez 3 associés qui partagent les mêmes passions pour les voyages, l’habitat alternatif et la vie en harmonie avec la nature. Et ainsi, partant d’une bonne base de relation amicale tout en réunissant leurs moyens techniques, financiers et compétences, ils ont décidé d’investir dans la location d’habitations insolites, comme les cabanes dans les arbres, les yourtes ou les cabane flottantes…</p>
+  <p class="lead">
+  </p>
+</div>
+</div>
+<div>
+<div class="row m-5 justify-content-center">
+<div class="card-round-home shadow" >
+<div class="row text-center justify-content-center p-5">
+    <img class="mb-5 newsletter-home" src="{{asset('images/question.png')}}" width="50%" >
+    <h2 class="mb-4">FAQ</h2>
+    <p>Questions les plus fréquement posés</p>
+
+</div>
+</div>
+<div class="card-round-home shadow">
+<div class="row text-center justify-content-center p-5">
+    <img class="mb-5 newsletter-home" src="{{asset('images/lettre.png')}}" width="50%" >
+    <h2 class="mb-4">Newsletter</h2>
+    <p>Inscrivez-vous à la newsletter Atypik House</p>
+
+</div>
+</div>
+<div class="card-round-home shadow">
+<div class="row text-center justify-content-center p-5">
+    <img class="mb-5 newsletter-home" src="{{asset('images/formulaire.png')}}" width="50%" >
+    <h2 class="mb-4">Contact</h2>
+    <p>Formulaire de Contact</p>
+ 
+</div>
+</div>
+</div>
+</div>
+</body>
+  {% include 'footer.html.twig' %}
+
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+{% endblock %}

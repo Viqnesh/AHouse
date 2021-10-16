@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+        <script src="https://kit.fontawesome.com/2e60cef163.js" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="{{ asset('js/autobahn.min.js') }}"></script>
+        <script>
+            var conn = new ab.Session('ws://localhost:8080',
+                function() {
+                    console.log("Connexion Autorisé");
+                    $( document ).ready(function() {
+                    });
+                    conn.subscribe('Bulle', function(topic, data) {
+                        document.getElementById("toast-body").innerHTML = 'Nouveau paramètre ajouté pour les Habitats "' + topic + '" ' ;
+                        $('#toast').toast('show');
+                        // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
+                        console.log('New article published to category "' + topic + '" : ' + data);
+                    });
+                },
+                function() {
+                    console.warn('WebSocket connection closed');
+                },
+                {'skipSubprotocolCheck': true}
+            );
+
+        </script>
+        {% endblock %}
+    </head>
+        {% block content %}
+    <div class="toast" id="toast" data-delay="100000" style="position: fixed; margin-top: 10% ;top: 0; right: 0;">
+        <div class="toast-header">
+          <i class="far fa-bell"></i>
+          <strong class="mr-auto text-center" style="margin-left: 5%;">Ajout d'un Paramètre</strong>
+          <button type="button" class="ml-2 mb-1 close" style="border: none;margin-left: 40%;" data-dismiss="toast" aria-label="Close">
+              <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="toast-body" id="toast-body">
+            Un Nouveau paramètre vient d'être ajouté. Consulter vos alertes pour en savoir plus
+        </div>
+    </div>
+        {% endblock %}
+
+        {% block body %}
+
+        {% endblock %}
+        
+{% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+{% endblock %}
+

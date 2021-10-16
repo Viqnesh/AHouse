@@ -1,0 +1,113 @@
+{% extends 'internaute.html.twig' %}
+
+{% block titre %} Dashboard {% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/ui.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('fonts/fontawesome/css/all.min.css')}}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenuPrincipal %}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% include 'headerLogged.html.twig' %}
+{% else %}
+{% include 'header.html.twig' %}
+{% endif %}
+
+<section class="section-content padding-y bg">
+    
+
+    <div class="container">
+    
+    <!-- ============================ COMPONENT 1 ================================= -->
+    <div class="card">
+        <div class="row no-gutters">
+            <aside class="col-md-6">
+    <article class="gallery-wrap"> 
+        <article class="gallery-wrap"> 
+            <div class="img-big-wrap">
+               <a href="#"><img src="../images/items/9.jpg"></a>
+            </div> <!-- img-big-wrap.// -->
+            <div class="thumbs-wrap">
+              <a href="#" class="item-thumb"> <img src="../images/items/9.jpg"></a>
+              <a href="#" class="item-thumb"> <img src="../images/items/10.jpg"></a>
+              <a href="#" class="item-thumb"> <img src="../images/items/7.jpg"></a>
+              <a href="#" class="item-thumb"> <img src="../images/items/8.jpg"></a>
+            </div> <!-- thumbs-wrap.// -->
+        </article> 
+    </article> <!-- gallery-wrap .end// -->
+            </aside>
+            <main class="col-md-6 border-left">
+    <article class="content-body">
+    
+    <h2 class="title">Off-White Odsy-1000 Low-Top Sneakers</h2>
+    
+    <div class="rating-wrap my-3">
+        <ul class="rating-stars">
+
+    </div> <!-- rating-wrap.// -->
+     
+    
+    <p>Description</p>
+    
+    <dl class="row">
+      <dt class="col-sm-3">Date Début :</dt>
+      <dd class="col-sm-9">Odsy-1000</dd>
+    
+      <dt class="col-sm-3">Date Fin :</dt>
+      <dd class="col-sm-9">Brown</dd>
+    
+    </dl>
+    
+    <hr>
+        <div class="row">
+<!-- col.// -->
+
+        </div> <!-- row.// -->
+        <a href="{{ path('prise_de_vue_new', {'id': prise_de_vue.idHabitat}) }}" class="btn btn-primary"> Ajouter Une Nouvelle Photo </a>
+
+        <hr>
+        <a href="{{ path('commentaire_new', {'id': commentaire.idHabitat}) }}" class="btn btn-primary"> Ajouter Un Commentaire</a>
+
+    </article> <!-- product-info-aside .// -->
+            </main> <!-- col.// -->
+        </div> <!-- row.// -->
+    </div> <!-- card.// -->
+    <div class="row">
+        <div class="col-md-9">
+
+
+
+
+
+
+</div>
+</section>
+    <!-- ============================ COMPONENT 1 END .// ================================= -->
+
+
+        
+        <!-- ============================ COMPONENT 1 ================================= -->
+      
+{% include "footer.html.twig" %}
+
+{% endblock %}
+
+{% block javascripts %}
+        <script src="{{ asset('js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+

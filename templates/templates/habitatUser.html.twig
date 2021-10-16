@@ -1,0 +1,47 @@
+{% extends 'internaute.html.twig' %}
+
+{% block titre %} Dashboard {% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/templatemo-style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+{% endblock %}
+
+{% block contenuPrincipal %}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% include 'headerLogged.html.twig' %}
+
+<h2>Réservations</h2>
+{% for habitat in habitats %}
+<li>{{ habitat.nom}}</li>
+<li>{{ habitat.nbCouchages}}</li>
+<li>{{ habitat.prix}}</li>
+
+<li><a href="{{ path('historique', {habitat:habitat.id}) }}">Réservations en Attente</a></li>
+
+{% endfor %}
+
+{% include "footer.html.twig" %}
+
+{% else %}
+
+<h1>Vous n'êtes pas autorisé à voir cette page</h1>
+
+{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

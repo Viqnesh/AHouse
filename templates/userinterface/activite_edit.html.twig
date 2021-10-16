@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+          {% include 'userinterface/tabs.html.twig' %}
+
+            <div class="col mt-3 mb-3 p-5" style="background-color: white;">
+                      {% include 'userinterface/profilehead.html.twig' %}
+
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('home')}}">Accueil</a></li>
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute')}}">Mon Profil</a></li>
+                          <li class="breadcrumb-item"><a class="text-dark" href="{{path('internaute_domaine')}}">Mon Domaine</a></li>
+                          <li class="breadcrumb-item"><a class="text-dark" href="#">Modifier mon Domaine</a></li>
+                      </ol>
+                  </nav>
+                        <div class="col-12 mt-3">
+                            <div class="col-3" style="margin-left:80%;">
+                                <button class="btn-edit-profile"><a href="{{path('internaute_habitats_details' , { 'id': habitat.id })}}">Voir mon Domaine</a></button>
+
+                            </div>
+                        </div>
+                        <div class="text-center col-12 p-5">
+                            <h4>Indiquez la distance</h4>
+                        </div>
+                        {{ form_start(form) }}
+                        <div class="row border border-primary">
+                        <div class="col-12 mb-3 carte">
+                            <div class=" d-block p-3 col-12 content">
+                                <div class="row g-3 mb-4 align-items-center">
+                                  <div class="row g-3 mb-4 align-items-center">
+                                    <div class="col-2">
+                                      <label for="inputPassword6" class="col-form-label">Distance : </label>
+                                    </div>
+                                    <div class="col-5 mb-3">
+                                        {{ form_widget(form.distance) }}
+                                        <small id="emailHelp" class="form-text text-muted">{{ form_errors(form.distance) }}</small>
+                                    </div>
+
+                                  </div>
+  
+                                <div class="col-12 mt-3">
+                                        <div class="col-3" style="margin-left:80%;">
+                                            {{ form_widget(form.envoyer) }}
+                                            {{ form_end(form) }}
+
+                                </div>
+                                </div>
+                                    <div class="col-12 ml-5">
+                                    </div>
+                                  </div> 
+                            </div>
+
+                        </div>
+
+
+                        </div>
+
+                </div>
+                <!-- Navigation Tabs-->
+
+            </div>
+
+            
+        </div>
+    </div>
+{% include 'footer.html.twig' %}
+
+{% endblock %}

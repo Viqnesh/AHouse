@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Atypik House{% endblock %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+<body>
+
+                  <div class="col-md-12 text-center p-5 hero-head-contact">
+                  <h1 class="hero-title">Contact</h1>
+                  <nav class="text-center" aria-label="breadcrumb">
+                      <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item text-white" aria-current="page">Accueil</li>
+                        <li class="breadcrumb-item text-white activ" aria-current="page">Contact</li>
+                      </ol>
+                    </nav>
+                  <p class="hero-desc">Vous avez une question ? Remplissez ce formulaire pour que notre équipe puisse vous répondre</p>
+                  </div>
+              </div>
+      </div>
+                <div class=" mb-5" style="border-radius:30px;">
+                                  {{ form_start(contact) }}
+                    <div class=" mt-5">
+                            <div class="form-group mb-3 justify-content-center row">
+                            <div class="col-3">
+                            <label for="inputPassword6" class="col-form-label">Votre e-mail : </label>
+                            </div>
+                            <div class="col-3 mb-3">
+                                {{ form_widget(contact.email) }}
+                            </div>
+                            </div>
+                             <div class="form-group mb-3 justify-content-center row">
+                            <div class="col-3">
+                            <label for="inputPassword6" class="col-form-label">Objet : </label>
+                            </div>
+                            <div class="col-3 mb-3">
+                                {{ form_widget(contact.objet) }}
+                            </div>
+                            </div>
+                            <div class="form-group mb-3 justify-content-center row">
+                            <div class="col-3">
+                            <label for="inputPassword6" class="col-form-label">Contenu : </label>
+                            </div>
+                            <div class="col-3 mb-3">
+                                {{ form_widget(contact.contenu) }}
+                            </div>
+                            </div>
+                            <div class="form-group mb-3  justify-content-center row">
+                            <div class="col-6 mb-3 text-center">
+                                {{ form_widget(contact.envoyez, { 'label': 'Enregistrez' }) }}
+                            </div>
+                            </div>
+                    </div>
+                    {{ form_end(contact) }} 
+                          </div>
+                      </div>
+                   </div>
+              </div>
+  
+  {% include 'footer.html.twig' %}
+
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+{% endblock %}

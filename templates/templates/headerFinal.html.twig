@@ -1,0 +1,7 @@
+{% if is_granted('ROLE_ADMIN') %}
+{% include 'headerAdmin.html.twig' %}
+{% elseif is_granted('ROLE_USER') %}
+{% include 'headerLogged.html.twig' %}
+{% else %}
+{% include 'header.html.twig' %}
+{% endif %}

@@ -1,0 +1,92 @@
+{% extends 'internaute.html.twig' %}
+
+{% block titre %} Dashboard {% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/tooplate-style.css') }}" rel="stylesheet" />                                   <!-- Templatemo style -->
+<link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome4.7.0/css/all.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/ui.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenuPrincipal %}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+{% include 'headerFinal.html.twig' %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y" style="margin : 13%;">
+    <div class="container">
+    
+    <div class="row">
+    
+        {% for location in locations %}
+        <article class="card card-product-list">
+            <div class="row no-gutters">
+                <aside class="col-md-4">
+                    <a href="#" class="img-wrap">
+                        <img src="{{ asset(location.idHabitatidLocation.url) }}">
+                    </a>
+                </aside> <!-- col.// -->
+                <div class="col-md-">
+                    <div class="info-main">
+                        <a href="#" class="h5 title"> {{ location.idHabitatIdLocation.nom }}  </a>
+                        <div class="rating-wrap mb-3">
+                            <ul class="rating-stars">
+                                <small class="text"> <i class="fa fa-map-marker text-muted"></i> Réservé le : {{ location.dateReservation|date('Y-m-d') }}  </small>
+        
+                            </ul>
+                        </div> <!-- rating-wrap.// -->
+                        
+                        <p> </p><br>
+                        <h7> <i class="far fa-calendar-alt"></i>  Début : <b>{{ location.dateDebut|date('Y-m-d') }} </b></h7><br><br>
+                        <h7> <i class="far fa-calendar-alt"></i>  Fin : <b>{{ location.dateDebut|date('Y-m-d') }}</b></h7>
+                    </div> <!-- info-main.// -->
+                </div> <!-- col.// -->
+                <aside class="col-sm-3">
+                    <div class="info-aside">
+                        <div class="price-wrap">
+                            <span class="price h7"> <i class="fas fa-euro-sign"></i>  Prix : {{ location.idHabitatIdLocation.prix }} €  </span>	
+                        </div> <br><!-- info-price-detail // -->
+                        <div class="price-wrap">
+                            <span class="price h7"> <i class="fas fa-bed"></i> Couchages : {{ location.idHabitatIdLocation.nbCouchages }}   </span>	
+                        </div><br> <!-- info-price-detail // -->
+                        <div class="price-wrap">
+                            <span class="price h7"> <i class="fas fa-home"></i> Capacite : {{ location.idHabitatIdLocation.capacite }} </span>	
+    
+                        </div> <!-- info-price-detail // -->
+                        <br>
+                        <p>
+                            </a>
+                        </p>
+                    </div> <!-- info-aside.// -->
+                </aside> <!-- col.// -->
+            </div> <!-- row.// -->
+        </article> <!-- card-product .// -->
+        {% endfor %}
+            
+    
+    </div>
+    
+    </div> <!-- container .//  -->
+</section>
+
+{% endblock %}
+
+{% block javascripts %}
+        <script src="{{ asset('js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+{% endblock %}
+

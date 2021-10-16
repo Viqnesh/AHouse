@@ -1,0 +1,45 @@
+<div class="col-3 m-3 bg-white">
+
+<h3 class="mb-5 text-center mt-5"><i class="bi bi-person-square"></i> Mon Profil</h3>
+<ul class="profil-onglet ">
+    <li class="nav-item active">
+        <a class="nav-link" aria-current="page" href="{{path('internaute')}}"><i class="fas fa-info-circle"></i> Informations Générales</a>
+      </li>
+    <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{path('internaute_domaine')}}"><i class="fas fa-home"></i> Mon Domaine</a>
+    </li>
+    <div class="nav-item show ">
+      <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-campground"></i> Mes Habitats
+      </a>
+    
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="nav-link" href="{{path('internaute_habitats')}}">Consulter mes habitats</a>
+        <a class="nav-link" href="{{path('internaute_habitats_new' , {'id':profil.id} )}}">Ajouter un habitat</a>
+      </div>
+    </div>
+    <div class="nav-item show ">
+      <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="far fa-calendar-alt"></i>  Mes Locations
+      </a>
+    
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="nav-link" href="{{path('internaute_location')}}">Locations en attente</a>
+        <a class="nav-link" href="{{path('listeHistorique')}}">Historique des locations</a>
+      </div>
+    </div>
+    <div class="nav-item show ">
+      <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="far fa-plus-square"></i> Publier
+      </a>
+    
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="nav-link" href="{{path('locations_comments')}}">Ecrire un commentaire</a>
+        <a class="nav-link" href="{{path('locations_comments')}}">Poster une photo</a>
+      </div>
+    </div>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{{path('notification')}}"><i class="far fa-bell"></i>Voir mes alertes</a>
+    </li>
+</ul>
+</div>

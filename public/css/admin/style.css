@@ -1,0 +1,68 @@
+.titleDashboard {
+    text-align: center;
+    padding : 3% ;
+}
+
+.col {
+    
+    background-color: white;
+    opacity: 60% ;
+    height : 15% ;
+}
+
+.grid-container {
+    display : flex ;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.grid-item {
+    width: 25%;
+    border-right: 2px solid lightgrey;
+    padding: 1%;
+    vertical-align: top;
+    
+}
+
+h4 {
+    padding: 2% ;
+    font-family: 'Arial';
+}
+
+.img-destin {
+    width: 100%;
+    height: 100%;
+}
+
+.section-destin {
+    padding: 9%;
+}
+.barItem {
+
+}
+
+.titleBar {
+    font-size: 14px;
+}
+.bar {
+    display: inline-flex;
+}
+.descriptionBar {
+    font-size: 12px;
+}
+.icon-grid {
+    border-radius:.3125rem;;
+    background-color: cyan;
+    width: 5%;
+}
+
+.container-art {
+    display : flex ;
+    width: 15% ;
+
+}
+
+.footerATY {
+    background-color : azure;
+}

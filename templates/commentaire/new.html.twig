@@ -1,0 +1,67 @@
+{% extends 'internaute.html.twig' %}
+
+{% block titre %} Dashboard {% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/ui.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('fonts/fontawesome/css/all.min.css')}}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenuPrincipal %}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% include 'headerLogged.html.twig' %}
+{% else %}
+{% include 'header.html.twig' %}
+{% endif %}
+
+<section class="section-content padding-y bg">
+    
+
+    <div class="container">
+    
+    <!-- ============================ COMPONENT 1 ================================= -->
+<!-- ============================ COMPONENT SIGNUP ================================= -->
+<div class="card">
+    <article class="card-body">
+    <header class="mb-4">
+        <h4 class="card-title">Détail de votre Réservation</h4>
+    </header>
+    <h1>Create new Commentaire</h1>
+
+    {{ include('commentaire/_form.html.twig') }}
+
+    <a href="{{ path('commentaire_index') }}">back to list</a>
+    <hr>
+    </article> <!-- card-body end .// -->
+    </div> <!-- card.// -->
+
+
+</div>
+</section>
+    <!-- ============================ COMPONENT 1 END .// ================================= -->
+
+
+        
+        <!-- ============================ COMPONENT 1 ================================= -->
+      
+{% include "footer.html.twig" %}
+{% endblock %}
+
+{% block javascripts %}
+        <script src="{{ asset('js/jquery-2.0.0.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+
